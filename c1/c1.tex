@@ -7,6 +7,61 @@
 \tableofcontents
 \newpage
 
-\section{}
+\section{Riemannian Structure}
+
+\begin{definition}[Riemannian Structure]
+    Let $M$ be a smooth $n$-manifold. Then a \textbf{Riemannian Structure} on it is an assignment $M \ni p \mapsto g_p$, where $g_p: T_p M \times T_p M \to \R$ is a bilinear positive definite symmetric form, that depends smoothly on $p$. Such $g$ is a \textbf{Riemannian metric}. 
+    
+    Specifically, if $(x^1, \dots, x^n)$ is a coordinate system on $U \subseteq M$, then for $i, j \in \llbracket 1, n \rrbracket$, $p \in U$, define
+    \[
+        g_{ij}(p) = g_p\left(\restr{\pp{}{x^i}}{p}, \restr{\pp{}{x^j}}{p}\right)
+    \]
+    where $\restr{\pp{}{x^i}}{p} \in M$ for all $i$. Then $g_{ij}$ is $C^{\infty}$; and $g(p) = (g_{ij}(p))$ is a symmetric matrix that depends on $p$. The matrix is often referred to as the \textbf{metric tensor}.
+\end{definition}
+
+\begin{definition}[Riemannian Manifold]
+    A \textbf{Riemannian Manifold} is a smooth manifold $M$ endowed with a Riemannian Metric $g$, often denoted as pair $(M, g)$. 
+\end{definition}
+
+\begin{example}
+    Let $M \subseteq \R^N$ be a smooth manifold. Then for all $p \in M$, via embedding the tangent space into $\R^N$, $T_p M \subseteq \R^N$. The inner product in the usual sense (dot product in $\R^n$) gives $M$ a Riemannian structure.
+\end{example}
+
+\begin{example}
+    Take $M = S^2 \subset \R^3$, and let $U = S^2 \cap \{ (x_1, x_2, x_3) \in \R^3 \mid x_3 > 0 \}$. Specify the Riemannian structure as the inner product in $\R^3$, with the tangent space regarded as planes in $\R^3$, taking the local coordinate system as $(x_1, x_2)$, then at $(x_1, x_2)$, the metric tensor for the tangent space is given by
+    \[
+        g = \frac{1}{1- (x_1^2 + x_2^2)} \begin{pmatrix}
+            1 - x_2^2 & x_1 x_2 \\
+            x_1 x_2 & 1 - x_1^2
+        \end{pmatrix}
+    \]
+    To see that this is indeed the metric, notice that at $T_{(x_1, x_2)} M$ for $(x_1, x_2) \in U$, the normal vector is given by $(x_1, x_2, \sqrt{1 - x_1^2 - x_2^2})$. Therefore $\bm{\alpha} \in T_{(x_1, x_2)}M$ must be in the form of $(a, b, -\frac{a x_1 + b x_2}{\sqrt{1 - x_1^2 - x_2^2}})$ for $a, b \in \R$. Let $\bm{\beta} := (c, d, -\frac{c x_1 + d x_2}{\sqrt{1 - x_1^2 - x_2^2}}) \in T_{(x_1, x_2)} M$. Then
+    \begin{align*}
+        \inner{\bm{\alpha}, \bm{\beta}} 
+        & = ac + bd + \frac{ac x_1^2 + bd x^2 + (ad + bc)(x_1 x_2)}{1 - x_1^2 - x_2^2} \\
+        & = \frac{1}{1 - x_1^2 - x_2^2} \left( ac(1 - x_2^2) + bd(1 - x_1^2) + ad(x_1 x_2) + bc(x_1 x_2) \right)
+    \end{align*}
+    where the entries of the metric tensor can be read off. 
+\end{example}
+
+\begin{observation}
+    The \underline{length} can thus be defined given the generalization of inner product on the structure. For $\gamma: [0, 1] \to M$, the length of $\gamma$
+    \[
+        \norm{\gamma} = \int_{0}^{1} \sqrt{g_{\gamma(t)} \left(\dd{}{t}{\gamma(t)}, \dd{}{t}{\gamma(t)}\right)} =: \int_{0}^{1} \sqrt{g_{\gamma(t)} \left(\dot{\gamma}, \dot{\gamma}\right)} 
+    \]
+    If $M$ is connected, Then the distance between $a, b \in M$ is $\inf\limits_{\gamma(0) = a, \gamma(1) = b} \norm{\gamma}$.
+\end{observation}
+
+\section{Vector Bundle}
+
+\section{Tensor Product}
+
+\section{Riemannian Metric}
+
+\section{Coverings}
+
+\section{Metric on Lee Group}
+
+\section{Common Objects on Riemannian Manifolds}
 
 \end{document}

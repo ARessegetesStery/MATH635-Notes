@@ -43,6 +43,7 @@
 \def\mod#1{\ (\text{mod}\ #1)}
 \def\lcm{\mathrm{lcm}}
 \def\abs#1{\left|#1\right|}
+\def\norm#1{\left\|#1\right\|}
 \def\JacSymb#1#2{\left(\frac{#1}{#2}\right)}
 \def\nequiv{\centernot\equiv}
 \def\im{\mathrm{im}\ }
@@ -75,6 +76,25 @@
 
 \def\tensor{\otimes}
 
+% Notations for Differential Geometry
+\def\RP{\mathbb{RP}}
+\def\CP{\mathbb{CP}}
+\def\Diffeo{\mathrm{Diffeo}}
+\def\Homeo{\mathrm{Homeo}}
+\def\Diff{\mathrm{Diff}}
+\def\GL{\mathrm{GL}}
+\def\SL{\mathrm{SL}}
+\def\SO{\mathrm{SO}}
+\def\O{\mathrm{O}}
+
+\def\closure#1{\overline{#1}}
+\def\restr#1#2{\left.#1\right|_{#2}}
+
+\def\ppd#1{\frac{\partial}{\partial #1}}
+\def\pp#1#2{\frac{\partial #1}{\partial #2}}
+\def\dd#1#2{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+
+
 \newtheoremstyle{example}
 {3pt} % Space above
 {3pt} % Space below
@@ -95,20 +115,31 @@
 {.5em} % Space after theorem head
 {} % Theorem head spec (can be left empty, meaning `normal')
 
+\newtheoremstyle{observation}
+{3pt} % Space above
+{3pt} % Space below
+{\textup} % Body font
+{} % Indent amount
+{\bfseries} % Theorem head font
+{.} % Punctuation after theorem head
+{.5em} % Space after theorem head
+{} % Theorem head spec (can be left empty, meaning `normal')
+
 \newtheorem{definition}{Definition}[section]
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{problem}{Problem}[section]
-\newtheorem{conjecture}{Conjecture}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{problem}[definition]{Problem}
+\newtheorem{conjecture}[definition]{Conjecture}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
 \theoremstyle{definition}
-\newtheorem{remark}{Remark}[section]
+\newtheorem{remark}[definition]{Remark}
 \theoremstyle{definition}
-\newtheorem{corollary}{Corollary}[section]
+\newtheorem{corollary}[definition]{Corollary}
 \theoremstyle{definition}
-\newtheorem{parenthesis}{Parenthesis}[section]
+\newtheorem{parenthesis}[definition]{Parenthesis}
+\newtheorem{observation}[definition]{Observation}
 \theoremstyle{definition}
-\newtheorem{example}{Example}[section]
+\newtheorem{example}[definition]{Example}
 
 \geometry{a4paper,left=0.5in,right=0.5in,top=1in,bottom=1in}
 \linespread{1.4}
