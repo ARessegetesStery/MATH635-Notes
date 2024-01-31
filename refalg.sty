@@ -69,7 +69,7 @@
 \def\catrmod#1{\cat{Mod}_{#1}}
 \def\cattop{\cat{Tops}}
 \def\Ob{\mathrm{Ob}}
-\def\dual#1{#1^{\circ}}
+\def\dual#1{#1^{\ast}}
 
 \def\catc{\mathscr{C}}
 \def\catd{\mathscr{D}}
@@ -94,6 +94,9 @@
 \def\pp#1#2{\frac{\partial #1}{\partial #2}}
 \def\dd#1#2{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
 
+\def\d{\mathrm{d}}
+
+\def\smooth{C^{\infty}}
 
 \newtheoremstyle{example}
 {3pt} % Space above
@@ -116,6 +119,16 @@
 {} % Theorem head spec (can be left empty, meaning `normal')
 
 \newtheoremstyle{observation}
+{3pt} % Space above
+{3pt} % Space below
+{\textup} % Body font
+{} % Indent amount
+{\bfseries} % Theorem head font
+{.} % Punctuation after theorem head
+{.5em} % Space after theorem head
+{} % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{Notation}
 {3pt} % Space above
 {3pt} % Space below
 {\textup} % Body font
