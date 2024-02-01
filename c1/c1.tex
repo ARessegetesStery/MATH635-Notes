@@ -16,7 +16,7 @@
     \[
         g_{ij}(p) = g_p\left(\restr{\pp{}{x^i}}{p}, \restr{\pp{}{x^j}}{p}\right)
     \]
-    where $\restr{\pp{}{x^i}}{p} \in M$ for all $i$. Then $g_{ij}$ is $C^{\infty}$; and $g(p) = (g_{ij}(p))$ is a symmetric matrix that depends on $p$. The matrix is often referred to as the \textbf{metric tensor}. The calculation can be defined via specifying $g_p(v_1, v_2) = v_1^T g(p) v_2$.
+    where $\restr{\pp{}{x^i}}{p} \in M$ for all $i$. Then $g_{ij}$ is $\smooth$; and $g(p) = (g_{ij}(p))$ is a symmetric matrix that depends on $p$. The matrix is often referred to as the \textbf{metric tensor}. The calculation can be defined via specifying $g_p(v_1, v_2) = v_1^T g(p) v_2$.
 \end{definition}
 
 \begin{definition}[Riemannian Manifold]
@@ -39,7 +39,7 @@
     \begin{align*}
         \inner{\bm{\alpha}, \bm{\beta}} 
         & = ac + bd + \frac{ac x_1^2 + bd x^2 + (ad + bc)(x_1 x_2)}{1 - x_1^2 - x_2^2} \\
-        & = \frac{1}{1 - x_1^2 - x_2^2} \left( ac(1 - x_2^2) + bd(1 - x_1^2) + ad(x_1 x_2) + bc(x_1 x_2) \right)
+        & = \frac{1}{1 - x_1^2 - x_2^2} \left( ac(1 - x_2^2) + bd(1 - x_1^2) + ad(x_1 x_2) + bc(x_2 x_1) \right)
     \end{align*}
     where the entries of the metric tensor can be read off. 
 \end{example}
@@ -54,7 +54,119 @@
 
 \section{Vector Bundle}
 
-\section{Tensor Product}
+\begin{definition}[Vector Bundle]
+    A \textbf{(real) vector bundle of rank $k$ over $M$} is a surjection $\pi: \mathcal{E} \to M$ satisfying the following properties:
+    \begin{enumerate}
+        \item For all $p \in M$, $\mathcal{E}_p := \pi^{-1}(p)$ has a real vector space structure of dimension $k$.
+        \item For all $p \in M$, there exists an open neighborhood $U \subset M$ containing $p$, and a diffeomorphism $\chi: \pi^{-1}(U) \iso U \times \R^n$ together with the projection $p: U \times \R^n \to U$ s.t.
+        \begin{itemize}
+            \item $\restr{\pi}{U} = p \circ \chi$, i.e. the following diagram commutes:
+            \begin{figure}[htbp]
+                \centering
+                \begin{tikzcd}
+                    \pi^{-1}(U) \arrow[rr, "\chi"] \arrow[rrdd, "\restr{\pi}{\pi^{-1}(U)}"] & & U \times \R^n \arrow[dd, "p"] \\
+                    & & \\
+                    & & U
+                \end{tikzcd}
+            \end{figure}
+            \item For all $p \in U$, $\restr{\chi}{p}: \mathcal{E}_p \to \{p\} \times \R^n$ is a linear isomorphism.
+        \end{itemize}
+        $E$ is the \underline{total space}, and $M$ is the \underline{base}. The map $\chi$ is called the \underline{local trivialization} of $E$ at $p$.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    The following gives some examples of vector bundle:
+    \begin{enumerate}
+        \item The vector bundle which associates every point in $M$ the vector space $\R^n$, given by $\pi: M \times \R^n \to M$ is the trivial bundle. 
+        \item Consider $\mathcal{E} = TM$ which is the tangent bundle (or isomorphically, the cotangent bundle $\dual{T}M$), defined as $TM = \coprod_{p \in M} T_p M$. Then if $\phi = (x^1, \dots, x^n)$ is a coordinate system on $U \subset M$, we have a basis $\left\{ \pp{}{x^1}, \dots, \pp{}{x^n} \right\}$ a basis of $T_p M$ for each $p \in M$. The map $\chi$ is then given by 
+        \[
+            \chi: \pi^{-1}(U) = TU \to U \times \R^n, \quad (p, T_p M \ni v) \mapsto (p, \inner{v^1, \dots, v^n}) \text{ s.t. } v = \sum_{i = 1}^{n} v^i \pp{}{x^i}
+        \]
+        $\chi$ is a diffeomorphism as the tangent space $TM$ has a smooth structure. Similarly one can consider the dual $\dual{T}M$ with basis $\{\d x^1, \dots, \d x^n\}$. Then the corresponding map becomes
+        \[
+            \chi: \pi^{-1}(U) = \dual{T}U \to U \times \R^n, \quad (p, \dual{T_p}M \ni \alpha) \mapsto (p, \inner{a_1, \dots, a_n}) \text{ s.t. } \alpha = \sum_{i = 1}^n a_i\d x^i
+        \]
+        where $\alpha: T_p M \to \R$ is a linear map. 
+        \item Let $M \subset \R^N$ be a $n$-manifold. Define $\mathcal{E} = \left\{ (p, v) \mid p \in \mathcal{E}, v \in (T_pM)^{\perp} \right\}$, The map can be defined as
+        \[
+            \chi: \pi^{-1}(U) \to U \times \R^{N - n}, \quad (p, v) \mapsto (p, v)
+        \]
+        which is the identity if one identifies $T_p M$ with a subspace of $\R^N$.
+    \end{enumerate}
+\end{example}
+
+\begin{definition}[Section]
+    Let $\pi: \mathcal{E} \to M$ be a vector bundle. Then a \textbf{(smooth) section} is a (smooth) map $s: M \to \mathcal{E}$ s.t. $\pi \circ s = \Id_M$. The set of all smooth sections is denoted as $\Gamma(\mathcal{E}, M)$, or simply $\Gamma(\mathcal{E})$.
+\end{definition}
+
+\begin{remark}
+    Explained in plain words, a section selects an element $s(p) \in \mathcal{E}_p$ for each $p \in M$. Let $\mathcal{E} = TM$, and identifying the tangent space with $\R^N$ for some $N$, then a section $s$ gives a vector field on $M$.
+\end{remark}
+
+\begin{remark}
+    $\Gamma(\mathcal{E})$ defines a module structure over $\smooth(M)$, with the scalar multiplication defined as $\chi(f \cdot s(x)) = (x, f(x) \cdot (p_r\circ \chi \circ s)(x))))$, where $p_r: (U, \R^n) \to \R^n$ is the projection that takes the second field. This map is smooth, as both $f, p_r, \chi$ and $s$ are smooth. 
+\end{remark}
+
+\begin{definition}[Moving Frame]
+    Let $\mathcal{E} \to M$ be a vector bundle, and $U \subset M$ an open set. Then a \textbf{moving frame} of $\mathcal{E}$ on $U$ is an $r$-tuple $(E_1, \dots, E_r)$ s.t. for all $j$, $E_j$ is a section of $\mathcal{E} \supset \pi^{-1}(U) \to U$; and for all $p \in U$, $(E_1(p), \dots, E_r(p))$ gives a basis of $\mathcal{E}_p$.
+\end{definition}
+
+\begin{remark}
+    There is a bijection between moving frames of $\mathcal{E}$ on $U$ and trivializations $\chi: \pi^{-1}(U) \to U \times \R^n$:
+    \begin{itemize}
+        \item Given a moving frame $(E_1, \dots, E_r)$ of $\mathcal{E}$ on $U$, define
+        \[
+            \chi: \pi^{-1}(U) \to U \times \R^n, \quad v \mapsto (\pi(v), \inner{v^1, \dots, v^n}) \text{ s.t. } v = \sum_{i = 1}^n v^i E_i(p)
+        \]
+        \item Conversely, given a trivialization $\chi: \pi^{-1}(U) \to U \times \R^n$, define
+        \[
+            E_i: M \supset U \to \pi^{-1}U \subset \mathcal{E}, \quad p \mapsto \chi^{-1}(p, \langle 0, \underset{i\text{-th position}}{\underset{\uparrow}{\dots, 0, 1, 0, \dots}}, n\rangle)
+        \]
+        The vector space structure is induced by the vector space structure of $\R^n$.
+    \end{itemize}
+\end{remark}
+
+\begin{definition}[Transition]
+    Let $\pi: \mathcal{E} \to M$ be a vector bundle, and $U_{\alpha}, U_{\beta} \subset M$ two open subsets of $M$, and $\chi_{\alpha}, \chi_{\beta}$ be the corresponding local trivializations. Define $\phi_{\alpha, p} := p_r \circ \chi_{\alpha}$ where $p_r: (U, \R^n) \to \R^n$ is the projection. Then the \textbf{transition} between $\chi_{\alpha}$ and $\chi_\beta$ is a map $\tau_{\alpha \beta}$ s.t. for $f_{\alpha\beta}: U \times \R^n \to U \times \R^n, (p, v) \mapsto (p, \tau_{\alpha \beta}(v))$, the following diagram commutes:
+    \begin{figure}[htbp]
+        \centering
+        \begin{tikzcd}
+            \pi^{-1}(U_{\alpha} \cap U_{\beta}) \arrow[rr, "\chi_{\alpha}"] \arrow[rrdd, "\chi_{\beta}"] & & (U_{\alpha} \cap U_{\beta}) \times \R^r \arrow[dd, "f_{\alpha\beta}"] \\
+            & & \\
+            & & (U_{\alpha} \cap U_{\beta}) \times \R^r
+        \end{tikzcd}
+    \end{figure}
+\end{definition}
+
+\begin{observation}
+    $\tau_{\alpha \beta}: U_{\alpha} \cap U_{\beta} \to \GL_r(\R)$. It is smooth as $\chi$ is a diffeomorphism.
+\end{observation}
+
+\begin{remark}
+    By definition it is clear that $\tau_{\alpha \beta} = \tau_{\beta \alpha}^{-1}$; and $\tau_{\alpha \beta} \circ \tau_{\beta \gamma} = \tau_{\alpha \gamma}$.
+\end{remark}
+
+\begin{observation}
+    By the fact that any object defined on the vector space can be transferred to the vector bundle via the local trivialization since it is a diffeomorphism, constructions on vector spaces can be identified with constructions on vector bundles. 
+\end{observation}
+
+\begin{lemma}[Bundle Chart Lemma]
+    Given $M$ a smooth manifold, and for all $p \in M$ associate an $r$-dimensional vector space $\mathcal{E}_p$ to it. Define $\mathcal{E} := \coprod_{p \in M} \mathcal{E}_p$, and $\pi: \mathcal{E} \to M, (p, v) \mapsto p$. Further the followings are satisfied:
+    \begin{itemize}
+        \item There exists an open cover $\{U_{\alpha}\}$ of $M$.
+        \item For all $\alpha$, there exists a bijective map $\chi_{\alpha}: \pi^{-1}(U_{\alpha}) \iso U_{\alpha} \times \R^n$ s.t. $\pi = p \circ \chi_{\alpha}$ where $p$ is the projection $U_{\alpha} \times \R^n \to U_{\alpha}$.
+    \end{itemize}
+    Then there exists a unique $\smooth$ manifold structure on $\mathcal{E}$ s.t. $\chi_{\alpha}$ is a diffeomorphism; and $\mathcal{E}$ is a $\smooth$ bundle over $M$. 
+\end{lemma}
+
+\begin{example}
+    The proof of the previous lemma is via verifying that $\mathcal{E}$ is indeed a manifold, and is omitted here. The more interesting aspect is that this provides a lot of operations on bundles, for example combination of two bundles:
+
+    Let $(U_{\alpha})$ be an open cover of $M$, and $\pi': \mathcal{E}' \to M$, $\pi'': \mathcal{E}'' \to M$ be two vector bundles over $M$. Define $\mathcal{E}' \oplus \mathcal{E}'' \to M$, where $\mathcal{E}' \oplus \mathcal{E}'' = \coprod_{p \in M} (\mathcal{E}_p' \oplus \mathcal{E}_p'')$, Let $(U_{\alpha})$ be a cover of $M$ s.t. both $\mathcal{E}'$ and $\mathcal{E}''$ trivialize over each $U_{\alpha}$. Then it is valid to define the trivialization $\chi: \pi^{-1}(U_{\alpha}) \to U_{\alpha} \times (\R^{r'} \oplus \R^{r''})$ s.t. $\phi_{\alpha, p} = \phi_{\alpha, p}' \oplus \phi_{\alpha, p}''$. In matrices this gives a block diagonal matrix. 
+\end{example}
+
+\section{Tensors}
 
 \section{Riemannian Metric}
 

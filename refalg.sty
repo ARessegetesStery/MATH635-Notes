@@ -89,14 +89,14 @@
 
 \def\closure#1{\overline{#1}}
 \def\restr#1#2{\left.#1\right|_{#2}}
+\def\smooth{C^{\infty}}
 
 \def\ppd#1{\frac{\partial}{\partial #1}}
 \def\pp#1#2{\frac{\partial #1}{\partial #2}}
 \def\dd#1#2{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
-
 \def\d{\mathrm{d}}
 
-\def\smooth{C^{\infty}}
+\def\iso{\overset{\sim}{\longrightarrow}}
 
 \newtheoremstyle{example}
 {3pt} % Space above
@@ -128,7 +128,7 @@
 {.5em} % Space after theorem head
 {} % Theorem head spec (can be left empty, meaning `normal')
 
-\newtheoremstyle{Notation}
+\newtheoremstyle{notation}
 {3pt} % Space above
 {3pt} % Space below
 {\textup} % Body font
@@ -151,6 +151,7 @@
 \theoremstyle{definition}
 \newtheorem{parenthesis}[definition]{Parenthesis}
 \newtheorem{observation}[definition]{Observation}
+\newtheorem{notation}[definition]{Notation}
 \theoremstyle{definition}
 \newtheorem{example}[definition]{Example}
 
