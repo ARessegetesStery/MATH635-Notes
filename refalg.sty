@@ -11,7 +11,6 @@
 \RequirePackage{graphicx}
 \RequirePackage{nicematrix}
 \RequirePackage{wrapfig}
-\RequirePackage[hidelinks]{hyperref}
 \RequirePackage{stmaryrd}
 \RequirePackage{mathrsfs}
 \RequirePackage{fancyhdr}
@@ -24,6 +23,14 @@
 \RequirePackage{tikz-cd}
 \RequirePackage{xspace}
 \RequirePackage{enumitem}
+
+\RequirePackage{thmtools}
+
+\definecolor{darkblue}{rgb}{.2,.2,.55} 
+\definecolor{lightgreen}{rgb}{.01,.64,.73}
+\definecolor{lightblue}{rgb}{.18,.53,.87}
+\definecolor{lightpurple}{rgb}{.45,.30,.70}
+\RequirePackage[colorlinks,linkcolor=lightgreen,urlcolor=lightblue]{hyperref}
 
 % \geometry{a4paper,left=0.5in,right=0.5in,top=1in,bottom=1in}
 % \linespread{1.4}
@@ -70,6 +77,8 @@
 \def\cattop{\cat{Tops}}
 \def\Ob{\mathrm{Ob}}
 \def\dual#1{#1^{\ast}}
+\def\too{\longrightarrow}
+\def\tooh#1{\overset{#1}{\longrightarrow}}
 
 \def\catc{\mathscr{C}}
 \def\catd{\mathscr{D}}
@@ -77,6 +86,7 @@
 \def\tensor{\otimes}
 
 % Notations for Differential Geometry
+\def\linspan{\mathrm{span}}
 \def\RP{\mathbb{RP}}
 \def\CP{\mathbb{CP}}
 \def\Diffeo{\mathrm{Diffeo}}
@@ -98,62 +108,60 @@
 
 \def\iso{\overset{\sim}{\longrightarrow}}
 
-\newtheoremstyle{example}
-{3pt} % Space above
-{3pt} % Space below
-{\textup} % Body font
-{} % Indent amount
-{\bfseries} % Theorem head font
-{.} % Punctuation after theorem head
-{.5em} % Space after theorem head
-{} % Theorem head spec (can be left empty, meaning `normal')
+\renewcommand{\implies}{\ \ensuremath{\Longrightarrow}\ }
 
-\newtheoremstyle{parenthesis}
-{3pt} % Space above
-{3pt} % Space below
-{\textup} % Body font
-{} % Indent amount
-{\bfseries} % Theorem head font
-{.} % Punctuation after theorem head
-{.5em} % Space after theorem head
-{} % Theorem head spec (can be left empty, meaning `normal')
+\theoremstyle{definition}
 
-\newtheoremstyle{observation}
-{3pt} % Space above
-{3pt} % Space below
-{\textup} % Body font
-{} % Indent amount
-{\bfseries} % Theorem head font
-{.} % Punctuation after theorem head
-{.5em} % Space after theorem head
-{} % Theorem head spec (can be left empty, meaning `normal')
+\definecolor{darkblue}{HTML}{0077b6}
+\definecolor{darkgray}{RGB}{50,50,50}
+\definecolor{darkpurple}{HTML}{5e60ce}
+\definecolor{darkgreen}{HTML}{588157}
+\definecolor{darkbrown}{HTML}{7f4f24}
 
-\newtheoremstyle{notation}
-{3pt} % Space above
-{3pt} % Space below
-{\textup} % Body font
-{} % Indent amount
-{\bfseries} % Theorem head font
-{.} % Punctuation after theorem head
-{.5em} % Space after theorem head
-{} % Theorem head spec (can be left empty, meaning `normal')
+\def\thmstyle#1#2
+{
+  \declaretheoremstyle[
+    headfont=\bfseries\sffamily\color{#1!70!black!85}, bodyfont=\normalfont,
+    spaceabove=1em,
+    mdframed={
+            linewidth=2pt,
+            rightline=false, topline=false, bottomline=false,
+            linecolor=#1!70!black!50, backgroundcolor=#1!4.5,
+            nobreak=false
+        }
+]{#2}
+}
 
-\newtheorem{definition}{Definition}[section]
-\newtheorem{theorem}[definition]{Theorem}
-\newtheorem{problem}[definition]{Problem}
-\newtheorem{conjecture}[definition]{Conjecture}
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem{proposition}[definition]{Proposition}
-\theoremstyle{definition}
-\newtheorem{remark}[definition]{Remark}
-\theoremstyle{definition}
-\newtheorem{corollary}[definition]{Corollary}
-\theoremstyle{definition}
-\newtheorem{parenthesis}[definition]{Parenthesis}
-\newtheorem{observation}[definition]{Observation}
-\newtheorem{notation}[definition]{Notation}
-\theoremstyle{definition}
-\newtheorem{example}[definition]{Example}
+\thmstyle{darkblue}{thmbox}
+\thmstyle{darkgray}{rmkbox}
+\thmstyle{darkpurple}{propbox}
+\thmstyle{darkgreen}{lemmabox}
+\thmstyle{darkbrown}{examplebox}
+
+\declaretheorem[style=thmbox, name=Definition, numberwithin=section]{definition}
+\declaretheorem[style=thmbox, name=Definition, numbered=no]{definition*}
+\declaretheorem[style=thmbox, name=Theorem, numberwithin=section, sibling=definition]{theorem}
+\declaretheorem[style=thmbox, name=Theorem, numbered=no]{theorem*}
+\declaretheorem[style=lemmabox, name=Lemma, numberwithin=section, sibling=definition]{lemma}
+\declaretheorem[style=lemmabox, name=Claim, numberwithin=section, sibling=definition]{claim}
+\declaretheorem[style=lemmabox, name=Parenthesis, numberwithin=section, sibling=definition]{parenthesis}
+\declaretheorem[style=examplebox, name=Example, numberwithin=section, sibling=definition]{example}
+\declaretheorem[style=rmkbox, name=Observation, numberwithin=section, sibling=definition]{observation}
+\declaretheorem[style=rmkbox, name=Remark, numberwithin=section, sibling=definition]{remark}
+\declaretheorem[style=rmkbox, name=Notation, numbered=no]{notation}
+\declaretheorem[style=propbox, name=Proposition, numberwithin=section, sibling=definition]{proposition}
+\declaretheorem[style=examplebox, name=Corollary, numberwithin=section, sibling=definition]{corollary}
+\declaretheorem[style=thmbox, name=Problem, numberwithin=section, sibling=definition]{problem}
+\declaretheorem[style=thmbox, name=Problem, numbered=no, sibling=definition]{problem*}
+
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-5.5ex \@plus -1ex \@minus -.2ex}%
+                                   {3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection {subsection}{1}{\z@}%
+                                   {-1.5ex \@plus -1ex \@minus -.2ex}%
+                                   {.5ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
 
 \geometry{a4paper,left=0.5in,right=0.5in,top=1in,bottom=1in}
 \linespread{1.4}

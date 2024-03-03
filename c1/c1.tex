@@ -16,7 +16,7 @@
     \[
         g_{ij}(p) = g_p\left(\restr{\pp{}{x^i}}{p}, \restr{\pp{}{x^j}}{p}\right)
     \]
-    where $\restr{\pp{}{x^i}}{p} \in M$ for all $i$. Then $g_{ij}$ is $\smooth$; and $g(p) = (g_{ij}(p))$ is a symmetric matrix that depends on $p$. The matrix is often referred to as the \textbf{metric tensor}. The calculation can be defined via specifying $g_p(v_1, v_2) = v_1^T g(p) v_2$.
+    where $\restr{\pp{}{x^i}}{p} \in T_p M$ for all $i$. Then $g_{ij}$ is $\smooth$; and $g(p) = (g_{ij}(p))$ is a symmetric matrix that depends on $p$. The matrix is often referred to as the \textbf{metric tensor}. Evaluation on the metric can be done via $g_p(v_1, v_2) = v_1^T g(p) v_2$.
 \end{definition}
 
 \begin{definition}[Riemannian Manifold]
@@ -24,7 +24,7 @@
 \end{definition}
 
 \begin{example}
-    Let $M \subseteq \R^N$ be a smooth manifold. Then for all $p \in M$, via embedding the tangent space into $\R^N$, $T_p M \subseteq \R^N$. The inner product in the usual sense (dot product in $\R^n$) gives $M$ a Riemannian structure.
+    Let $M \subseteq \R^N$ be a smooth manifold. Then for all $p \in M$, via embedding the tangent space into $\R^N$, $T_p M \subseteq \R^N$. The inner product in the usual sense (dot product in $\R^n$) gives $M$ a Riemannian structure. This implies that Euclidean Space obtains a Riemannian structure. 
 \end{example}
 
 \begin{example}
@@ -35,7 +35,7 @@
             x_1 x_2 & 1 - x_1^2
         \end{pmatrix}
     \]
-    To see that this is indeed the metric, notice that at $T_{(x_1, x_2)} M$ for $(x_1, x_2) \in U$, the normal vector is given by $(x_1, x_2, \sqrt{1 - x_1^2 - x_2^2})$. Therefore $\bm{\alpha} \in T_{(x_1, x_2)}M$ must be in the form of $(a, b, -\frac{a x_1 + b x_2}{\sqrt{1 - x_1^2 - x_2^2}})$ for $a, b \in \R$. Let $\bm{\beta} := (c, d, -\frac{c x_1 + d x_2}{\sqrt{1 - x_1^2 - x_2^2}}) \in T_{(x_1, x_2)} M$. Then
+    To see that this is indeed the metric, notice that at $T_{(x_1, x_2)} M$, the normal vector is given by $(x_1, x_2, \sqrt{1 - x_1^2 - x_2^2})$. Therefore $\bm{\alpha} \in T_{(x_1, x_2)}M$ must be in the form of $(a, b, -\frac{a x_1 + b x_2}{\sqrt{1 - x_1^2 - x_2^2}})$ for $a, b \in \R$. Let $\bm{\beta} := (c, d, -\frac{c x_1 + d x_2}{\sqrt{1 - x_1^2 - x_2^2}}) \in T_{(x_1, x_2)} M$. Then
     \begin{align*}
         \inner{\bm{\alpha}, \bm{\beta}} 
         & = ac + bd + \frac{ac x_1^2 + bd x^2 + (ad + bc)(x_1 x_2)}{1 - x_1^2 - x_2^2} \\
@@ -47,7 +47,7 @@
 \begin{observation}
     The \underline{length} can thus be defined given the generalization of inner product on the structure. For $\gamma: [0, 1] \to M$, the length of $\gamma$
     \[
-        \norm{\gamma} = \int_{0}^{1} \sqrt{g_{\gamma(t)} \left(\dd{}{t}{\gamma(t)}, \dd{}{t}{\gamma(t)}\right)} =: \int_{0}^{1} \sqrt{g_{\gamma(t)} \left(\dot{\gamma}, \dot{\gamma}\right)} 
+        \norm{\gamma} = \int_{0}^{1} \sqrt{g_{\gamma(t)} \left(\dd{}{t}{\gamma(t)}, \dd{}{t}{\gamma(t)}\right)}\d t =: \int_{0}^{1} \sqrt{g_{\gamma(t)} \left(\dot{\gamma}, \dot{\gamma}\right)} \d t
     \]
     If $M$ is connected, Then the distance between $a, b \in M$ is $\inf\limits_{\gamma(0) = a, \gamma(1) = b} \norm{\gamma}$.
 \end{observation}
@@ -61,14 +61,15 @@
         \item For all $p \in M$, there exists an open neighborhood $U \subset M$ containing $p$, and a diffeomorphism $\chi: \pi^{-1}(U) \iso U \times \R^n$ together with the projection $p: U \times \R^n \to U$ s.t.
         \begin{itemize}
             \item $\restr{\pi}{U} = p \circ \chi$, i.e. the following diagram commutes:
-            \begin{figure}[htbp]
+            
+            \begin{minipage}{\linewidth}
                 \centering
                 \begin{tikzcd}
                     \pi^{-1}(U) \arrow[rr, "\chi"] \arrow[rrdd, "\restr{\pi}{\pi^{-1}(U)}"] & & U \times \R^n \arrow[dd, "p"] \\
                     & & \\
                     & & U
                 \end{tikzcd}
-            \end{figure}
+            \end{minipage}
             \item For all $p \in U$, $\restr{\chi}{p}: \mathcal{E}_p \to \{p\} \times \R^n$ is a linear isomorphism.
         \end{itemize}
         $E$ is the \underline{total space}, and $M$ is the \underline{base}. The map $\chi$ is called the \underline{local trivialization} of $E$ at $p$.
@@ -105,7 +106,7 @@
 \end{remark}
 
 \begin{remark}
-    $\Gamma(\mathcal{E})$ defines a module structure over $\smooth(M)$, with the scalar multiplication defined as $\chi(f \cdot s(x)) = (x, f(x) \cdot (p_r\circ \chi \circ s)(x))))$, where $p_r: (U, \R^n) \to \R^n$ is the projection that takes the second field. This map is smooth, as both $f, p_r, \chi$ and $s$ are smooth. 
+    $\Gamma(\mathcal{E})$ defines a module structure over $\smooth(M)$, with the scalar multiplication defined as $\chi(f \cdot s(x)) = (x, f(x) \cdot (p_r\circ \chi \circ s)(x))$, where $p_r: (U, \R^n) \to \R^n$ is the projection that takes the second field. This map is smooth, as both $f, p_r, \chi$ and $s$ are smooth. 
 \end{remark}
 
 \begin{definition}[Moving Frame]
@@ -129,14 +130,15 @@
 
 \begin{definition}[Transition]
     Let $\pi: \mathcal{E} \to M$ be a vector bundle, and $U_{\alpha}, U_{\beta} \subset M$ two open subsets of $M$, and $\chi_{\alpha}, \chi_{\beta}$ be the corresponding local trivializations. Define $\phi_{\alpha, p} := p_r \circ \chi_{\alpha}$ where $p_r: (U, \R^n) \to \R^n$ is the projection. Then the \textbf{transition} between $\chi_{\alpha}$ and $\chi_\beta$ is a map $\tau_{\alpha \beta}$ s.t. for $f_{\alpha\beta}: U \times \R^n \to U \times \R^n, (p, v) \mapsto (p, \tau_{\alpha \beta}(v))$, the following diagram commutes:
-    \begin{figure}[htbp]
+
+    \begin{minipage}{\linewidth}
         \centering
         \begin{tikzcd}
             \pi^{-1}(U_{\alpha} \cap U_{\beta}) \arrow[rr, "\chi_{\alpha}"] \arrow[rrdd, "\chi_{\beta}"] & & (U_{\alpha} \cap U_{\beta}) \times \R^r \arrow[dd, "f_{\alpha\beta}"] \\
             & & \\
             & & (U_{\alpha} \cap U_{\beta}) \times \R^r
         \end{tikzcd}
-    \end{figure}
+    \end{minipage}
 \end{definition}
 
 \begin{observation}
@@ -160,13 +162,97 @@
     Then there exists a unique $\smooth$ manifold structure on $\mathcal{E}$ s.t. $\chi_{\alpha}$ is a diffeomorphism; and $\mathcal{E}$ is a $\smooth$ bundle over $M$. 
 \end{lemma}
 
-\begin{example}
-    The proof of the previous lemma is via verifying that $\mathcal{E}$ is indeed a manifold, and is omitted here. The more interesting aspect is that this provides a lot of operations on bundles, for example combination of two bundles:
+The proof of the lemma is via verifying that $\mathcal{E}$ is indeed a manifold, and is omitted here. The more interesting aspect is that this provides a lot of operations on bundles, for example combination of two bundles:
+
+\begin{example}\label{ex: direct sum of vector bundle}
 
     Let $(U_{\alpha})$ be an open cover of $M$, and $\pi': \mathcal{E}' \to M$, $\pi'': \mathcal{E}'' \to M$ be two vector bundles over $M$. Define $\mathcal{E}' \oplus \mathcal{E}'' \to M$, where $\mathcal{E}' \oplus \mathcal{E}'' = \coprod_{p \in M} (\mathcal{E}_p' \oplus \mathcal{E}_p'')$, Let $(U_{\alpha})$ be a cover of $M$ s.t. both $\mathcal{E}'$ and $\mathcal{E}''$ trivialize over each $U_{\alpha}$. Then it is valid to define the trivialization $\chi: \pi^{-1}(U_{\alpha}) \to U_{\alpha} \times (\R^{r'} \oplus \R^{r''})$ s.t. $\phi_{\alpha, p} = \phi_{\alpha, p}' \oplus \phi_{\alpha, p}''$. In matrices this gives a block diagonal matrix. 
 \end{example}
 
 \section{Tensors}
+
+\begin{definition}[Free Vector Space]
+    Let $S$ be a (possibly infinite) set, and $K$ a field. The \textbf{free vector space} generated by $S$ over $K$ is defined as the set
+    \[
+        FS := \left\{ \sum_{s \in S} \alpha_s s \bigmid \text{finite nonzero } \alpha_s \right\}
+    \]
+    satisfying the axioms of vector spaces, i.e. linear in $s$ with addition and scalar multiplication.
+\end{definition}
+
+\begin{definition}[Tensor Product]
+    Let $V, W$ be finite dimensional vector space. The \textbf{tensor product of $V$ and $W$} $V \tensor W$ is the free vector space generated by $(V \times W)/ \sim$, where $\sim$ follows the rules:
+    \begin{itemize}
+        \item $(v + v', w) \sim (v, w) + (v', w)$ for $v, v' \in V, w \in W$.
+        \item $(v, w + w') \sim (v, w) + (v, w')$ for $v \in V, w, w' \in W$.
+        \item $(cv, w) \sim c(v, w) \sim (v, cw)$ for $c \in K, v \in V, w \in W$.
+    \end{itemize}
+    This gives a map $\tensor: V \times W \to V \tensor W$, $(v, w) \mapsto [(v, w)]$ which is an equivalence class in $V \tensor W$.
+\end{definition}
+
+\begin{proposition}[Universal Property of Tensor Product]
+    Let $Z$ be a real vector space, and the map $b: V \times W \to Z$ bilinear. Then there exists a unique linear map $f: V \tensor W \to Z$ s.t. the following diagram commute:
+
+    \begin{minipage}{\linewidth}
+        \centering
+        \begin{tikzcd}
+            V \times W \arrow[rrdd, "b"] \arrow[rr, "\tensor"] & & V \tensor W \arrow[dd, "f"] \\
+            & & \\
+            & & Z \\
+        \end{tikzcd}
+    \end{minipage}
+\end{proposition}
+
+\begin{corollary}
+    Let $(v_i)$ be a basis of $V$, and $(w_i)$ a basis of $W$. Then $(v_i \tensor w_j)$ gives a basis of $V \tensor W$, with $\dim V \tensor W = \dim V \cdot \dim W$.
+\end{corollary}
+
+\begin{remark}
+    Not every element in $V \tensor W$ can be expressed as $v \tensor w$ for some $v \in V, w \in W$. In particular, one can have $v' = \sum_{i \in I} v_i \tensor w_i \in V \tensor W$ but whose representative cannot be further simplified. 
+\end{remark}
+
+\begin{proposition}
+    Let $V$ and $W$ be finite dimensional real vector space. Then there exists a natural isomorphism $V \tensor W \iso \Hom(\dual{V}, W)$. In particular, this gives $\dual{V} \tensor \dual{V} \simeq \Hom(V, \dual{V}) \simeq \{\text{bilinear forms } V \times V \to \R\}$.
+\end{proposition}
+
+\begin{proof}
+    To construct the map it suffices to give a bilinear map $V \times W \to \Hom(\dual{V}, W)$. Define it as
+    \[
+        (v, w) \mapsto (\alpha \mapsto \alpha(v) w) \in \Hom(\dual{V}, W)
+    \]
+    Applying the universal property gives the desired result. 
+\end{proof}
+
+\begin{remark}
+    This can be extended to multiple tensor products: 
+    \[
+        \underbrace{V \tensor \cdots \tensor V}_{k} \tensor \underbrace{\dual{V} \tensor \cdots \tensor \dual{V}}_{\ell} \quad \simeq \quad (\underbrace{\dual{V} \times \cdots \times \dual{V}}_{k} \times \underbrace{V \times \cdots \times V}_{\ell} \to \R) 
+    \]
+    where RHS is a multilinear map. 
+\end{remark}
+
+\begin{definition}
+    Denote
+    \[
+        G = \underbrace{V \tensor \cdots \tensor V}_{k} \tensor \underbrace{\dual{V} \tensor \cdots \tensor \dual{V}}_{\ell}
+    \]
+    Then an element in $G$ is called a $(k, \ell)$-tensor on $V$. $k$ is the \underline{contravariant degree}, and $\ell$ is the \underline{covariant degree}.
+\end{definition}
+
+\begin{remark}
+    It is possible to define the tensor product of maps. Namely, for $f: V \to V'$ and $g: W \to W'$, there exists a unique linear map $f \tensor g: V \tensor W \to V' \tensor W'$ s.t. $(f \tensor g) (v \tensor w) = (f(v)) \tensor (g(w))$. This can be seen via consider first the $\R$-balanced linear map $V \times W \to V \tensor W$; and apply the universal property of tensor product gives the desired result. 
+\end{remark}
+
+\begin{observation}
+    Similar to Example \ref{ex: direct sum of vector bundle} where we considered the direct sum of vector bundles as a new bundle, we can consider the tensor product of vector bundles. For $\mathcal{E}'$ and $\mathcal{E}''$ two vector bundles, $\coprod_{p \in M} \mathcal{E}_p' \tensor \mathcal{E}_p''$ gives a vector bundle structure over $M$. In particular, this can be extended to the tangent and cotangent spaces of a manifold.
+\end{observation}
+
+\begin{definition}[Tensor]
+    Let $M$ be a smooth manifold. 
+\end{definition}
+
+\begin{definition}[Tensor Field]
+    
+\end{definition}
 
 \section{Riemannian Metric}
 
