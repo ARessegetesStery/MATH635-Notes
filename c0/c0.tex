@@ -392,11 +392,11 @@ The following forms an ``standalone'' definition, which turns out to be compatib
 \begin{definition}[Tangent Vector (Standalone)]
     Let $M$ be a smooth $n$-manifold, with $p \in M$. Then
     \begin{enumerate}[label=\roman*)]
-        \item An \textbf{algebraic tangent vector (as derivatives)} is defined as a linear map $\partial: C^{\infty}(M) \to \R$ where $C^{\infty}(M)$ is defined as the smooth functions $M \to \R$, which satisfies the product rule (Leibniz rule):
+        \item An \textbf{algebraic tangent vector (as derivatives)} is defined as a linear map $\partial: C^{\infty}(M) \to \R$ where $C^{\infty}(M)$ is defined as smooth functions $M \to \R$, which satisfies the product rule (Leibniz rule):
         \[
             \forall f, g \in C^{\infty}(M), \qquad \partial(f \cdot g) = (\partial f) \cdot g + f \cdot (\partial g)
         \]
-        \item A \textbf{physical tangent vector} associated to a chart $(U, \varphi)$ where $p \in \varphi$, which is essentially a transformation into $\R^n$ (as in the previous case where the tangent space is treated as a submanifold of $\R^n$), is defined as a vector $v_{\varphi} \in \R^n$, satisfying the compatibility of change of charts: for all charts $(V, \psi)$ s.t. $p \in V$,
+        \item A \textbf{physical tangent vector} associated to a chart $(U, \varphi)$ where $p \in U$, which is essentially a transformation into $\R^n$ (as in the previous case where the tangent space is treated as a submanifold of $\R^n$), is defined as a vector $v_{\varphi} \in \R^n$, satisfying the compatibility of change of charts: for all charts $(V, \psi)$ s.t. $p \in V$,
         \[
             v_{\psi} = \restr{D(\psi \circ \varphi^{-1})}{\varphi(p)} \cdot v_{\varphi}
         \]
@@ -644,6 +644,9 @@ Recall that in Definition \ref{def: tangent space in R^n} which is under the con
         \d_p (F \circ G)([\gamma]) = [G \circ F \circ \gamma] = [G \circ (F \circ \gamma)] - \d_{G(p)}(F) \circ \d_pG([\gamma])
     \] 
 \end{remark}
+
+\subsection{Vector Field}
+
 
 \section{Differential Form}
 
