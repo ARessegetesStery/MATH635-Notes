@@ -222,7 +222,7 @@ The proof of the lemma is via verifying that $\mathcal{E}$ is indeed a manifold,
     Applying the universal property gives the desired result. 
 \end{proof}
 
-\begin{remark}
+\begin{remark}\label{rmk: tensor isomorphic to multilinear maps}
     This can be extended to multiple tensor products: 
     \[
         \underbrace{V \tensor \cdots \tensor V}_{k} \tensor \underbrace{\dual{V} \tensor \cdots \tensor \dual{V}}_{\ell} \quad \simeq \quad (\underbrace{\dual{V} \times \cdots \times \dual{V}}_{k} \times \underbrace{V \times \cdots \times V}_{\ell} \to \R) 
@@ -230,12 +230,12 @@ The proof of the lemma is via verifying that $\mathcal{E}$ is indeed a manifold,
     where RHS is a multilinear map. 
 \end{remark}
 
-\begin{definition}
+\begin{definition}[Tensor]
     Denote
     \[
         G = \underbrace{V \tensor \cdots \tensor V}_{k} \tensor \underbrace{\dual{V} \tensor \cdots \tensor \dual{V}}_{\ell}
     \]
-    Then an element in $G$ is called a $(k, \ell)$-tensor on $V$. $k$ is the \underline{contravariant degree}, and $\ell$ is the \underline{covariant degree}.
+    Then an element in $G$ is called a \textbf{$(k, \ell)$-tensor} on $V$. $k$ is the \underline{contravariant degree}, and $\ell$ is the \underline{covariant degree}.
 \end{definition}
 
 \begin{remark}
@@ -246,13 +246,23 @@ The proof of the lemma is via verifying that $\mathcal{E}$ is indeed a manifold,
     Similar to Example \ref{ex: direct sum of vector bundle} where we considered the direct sum of vector bundles as a new bundle, we can consider the tensor product of vector bundles. For $\mathcal{E}'$ and $\mathcal{E}''$ two vector bundles, $\coprod_{p \in M} \mathcal{E}_p' \tensor \mathcal{E}_p''$ gives a vector bundle structure over $M$. In particular, this can be extended to the tangent and cotangent spaces of a manifold.
 \end{observation}
 
-\begin{definition}[Tensor]
-    Let $M$ be a smooth manifold. 
-\end{definition}
+\begin{notation}
+    Given a smooth manifold $M$, for $k, \ell \in \Z_{\geq 0}$, denote
+    \[
+        \Pi^{(k, \ell)} M = \underbrace{TM \tensor \cdots \tensor TM}_{k} \tensor \underbrace{T^{\ast}M \tensor \cdots \tensor T^{\ast} M}_{\ell}
+    \]
+    In particular, this is $TM$ for $k = 1, \ell = 0$, and is $T^{\ast}M$ for $k = 0, \ell = 1$. By identification in Remark \ref{rmk: tensor isomorphic to multilinear maps} maps $\Pi^{(k, \ell)} M \to M$ are always multilinear (with the identification with the Euclidean Space). 
+\end{notation}
 
 \begin{definition}[Tensor Field]
-    
+    Let $M$ be a smooth manifold. A \textbf{$(k, \ell)$-tensor (field) on $M$} is a smooth section of $\Pi^{(k, \ell)} M$.
 \end{definition}
+
+In local coordinates, if we have local coordinates $(x^1, \dots, x^n)$ on $U \subseteq M$, then any element in $\Pi^{(k, \ell)} M$ is in the form of 
+\[
+    f_{j_1, \dots, j_{\ell}}^{i_1, \dots, i_k} := \ppd{x^{i_1}} \tensor \cdots \tensor \ppd{x^{i_k}} \tensor \d x^{j_1} \tensor \cdots \tensor \d x^{j \ell}
+\]
+where $i_k$s and $j_{\ell}$s run over $\{ 1, \dots, n \}$ arbitrarily. A section on $\Pi^{(k, \ell)} M$ is then $\sum_{i, j} f_{j_1, \dots, j_{\ell}}^{i_1, \dots, i_k}$, with it being smooth implies that all such $f$s are smooth (as functions).
 
 \section{Riemannian Metric}
 
