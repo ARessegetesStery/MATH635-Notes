@@ -13,6 +13,7 @@ Here lists some definitions that are assumed to be familiar to students in the l
 
 \section{Differential Form}
 
+\textstart
 This part seeks to introduce the differential between tangent bundles of manifolds, and its dual operation. To formalize this, some preliminaries from algebra need to be introduced first:
 
 \begin{definition}[Tensor Algebra]
@@ -43,8 +44,6 @@ This part seeks to introduce the differential between tangent bundles of manifol
         \Lambda(M) = \bigoplus_{i \geq 0} \Lambda^i(M), \qquad \text{where } \Lambda^i(M) := T^i(M) / \{ \inner{x \tensor x} \subset T^i M \mid x \in M \}
     \]
 \end{remark}
-
-
 
 \begin{definition}[Tangent Space]
     There are two equivalent definitions of tangent spaces, via specifying its elements \textbf{tangent vectors}. Let $M$ be a smooth $n$-manifold, with $(U, \varphi)$ a local chart of it. Then the \textbf{tangent space} of $M$ at $p$ is defined as:
@@ -88,7 +87,7 @@ This part seeks to introduce the differential between tangent bundles of manifol
 \end{definition}
 
 \begin{remark}
-    In particular, cotangent vectors are $1$-forms.
+    In particular, smooth functions are 0-forms, and cotangent vectors are 1-forms.
 \end{remark}
 
 \begin{remark}
@@ -96,7 +95,7 @@ This part seeks to introduce the differential between tangent bundles of manifol
     \[
         \dual{(w_1 \wedge \dots \wedge w_k)} \simeq \dual{w_1} \wedge \dots \dual{w_k}
     \]
-    i.e. there is an induced isomorphism between tensor of $1$-forms and $k$-forms, via taking the tensor product of the $1$-forms.
+    i.e. there is an induced isomorphism between tensor of 1-forms and $k$-forms, via taking the tensor product of the 1-forms.
 \end{remark}
 
 \begin{definition}[Pushforward, Pullback]
@@ -118,15 +117,171 @@ This part seeks to introduce the differential between tangent bundles of manifol
 \begin{definition}[Immersion, Submersion]
     The following is a pair of dual notions which specifies the differential pushforward of a smooth map $f: M \to N$:
     \begin{itemize}
-        \item $f$ is an \textbf{immersion} if for all $p \in M$, $d_p f : T_p  M \to T_{f(p)} N$ is injective.
+        \item $f$ is an \textbf{immersion} if for all $p \in M$, $d_p f : T_p  M \to T_{f          (p)} N$ is injective.
         \item $f$ is a \textbf{submersion} if for all $p \in M$, $d_p f : T_p  M \to T_{f(p)} N$ is surjective.
     \end{itemize}
 \end{definition}
 
+\section{Exterior and Interior Derivative}
+
+\textstart
+Under the context of differential geometry it is then interesting to figure out how the differential forms can be ``differentiated'' in a way that is compatible with the concept of derivatives of real-valued functions (i.e. $0$-forms). First we need some tools to consider how the differential forms act upon wedge products (the generalization of multiplication in the context of exterior algebra):
+
+\begin{remark}\label{rmk: wedge of differential forms}
+    Formally, the alternating product (wedge product) is viewed as an endomorphism on the tensor algebra:
+    \[
+        \operatorname{Alt}: T(M) \to T(M) \qquad (v_1 \tensor \cdots \tensor v_k) \mapsto \frac{1}{k!} \sum_{\sigma \in S_k} \operatorname{sgn}(\sigma) v_{\sigma(1)} \tensor \cdots \tensor v_{\sigma(k)}
+    \]
+    Therefore, given $\alpha$ a $p$-form, and $\beta$ a $q$-form, the wedge product of $\alpha$ and $\beta$ is (by the same averaging process)
+    \[
+        (\alpha\wedge\beta)(w_1, \dots, w_{p+q}) = \sum_{\sigma \in S(p, q)} \operatorname{sgn}(\sigma) \alpha(w_{\sigma(1)}, \dots, w_{\sigma(p)}) \beta(w_{\sigma(p+1)}, \dots, w_{\sigma(p+q)})
+    \]
+    where $\sigma \in S(p, q)$ denotes the permutation which preserves the relative order in first $p$ and last $q$ elements, respectively. 
+\end{remark}
+
+\begin{definition}[Graded Ring]
+    A ring $R$ is a \textbf{graded ring} is there exists subgroups $R_0, \dots, R_n, \dots$ of $R$ seen as an additive subgroup s.t. we have the decomposition of $R$
+    \[
+        R = \bigoplus_{n = 0} ^ {\infty} R_n
+    \]
+    and further for all $m, n \in \Z_{\geq 0}$, $R_m R_n \subseteq R_{m + n}$. 
+
+    An algebra is \underline{graded} if it is graded when viewed as a ring. An element $x$ in a graded ring $R$ is \underline{homogeneous} if there exists some $n$ s.t. $x \in R_n$. A \underline{graded map of degree $d$} is a map between the $d$-th grade in the domain and image. 
+\end{definition}
+
+\begin{notation}
+    The grade of a homogeneous element in a graded ring or a graded map is often denoted as $\abs{\cdot}$.
+\end{notation}
+
+\begin{definition}[Homogeneous Derivation]
+    Given a graded algebra $A$ which has a vector space structure, and a homogeneous linear map $D$, $D$ is a \textbf{homogeneous derivation} if for all $a, b \in A$ it satisfies the following condition:
+    \[
+        D(ab) = D(a)b + \varepsilon^{\abs{a}\abs{D}} \cdot aD(b)
+    \]
+    $\varepsilon$ is the \underline{commutative factor} which is 1 if $A$ is commutative, and $-1$ if $A$ is anti-commutative. 
+\end{definition}
+
+\begin{remark}
+    In the case where $\varepsilon = 1$ the derivation is simply the Leibniz rule. If $\varepsilon = -1$, and further $D$ is odd, we have
+    \[
+        D(ab) = D(a)b + (-1)^{\abs{a}} aD(b)
+    \]
+    In this case $D$ is an \underline{anti-derivation}.
+\end{remark}
+
+\begin{notation}
+    The $k$-forms on a manifold $M$ ($\Lambda^k(\dual{T_p} M)$) is often denoted by $\Omega^k(M)$. These notations are used interchangeably in the followings. 
+\end{notation}
+
+\begin{definition}[Exterior Derivative]
+    The \textbf{exterior derivative} is an $\R$-linear map $\d: \Lambda^k(\dual{T_p} M) \to \Lambda^{k + 1}(\dual{T_p} M)$ s.t.
+    \begin{enumerate}[label=\arabic*)]
+        \item For a 0-form $f$, $\d f$ is differential as real-valued functions.
+        \item $\d(\d f) = 0$ for any 0-form $f$.
+        \item $\d$ is an anti-derivation of degree 1 on the exterior algebra, i.e. it satisfies the following condition:
+        \[
+            \d(a \wedge b) = (\d a) \wedge b + (-1)^{\abs{a}} a \wedge (\d b)
+        \]
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    The exterior derivative is uniquely defined. This can be seen by the fact that the exterior derivative of all $0$-forms are determined by the uniqueness of derivative of real-valued functions; and inductively the derivative of $n$-forms can be expressed as the wedge product of the differential of two lower degree derivatives. 
+\end{remark}
+
+\begin{remark}
+    The exterior derivative is linear, i.e. $\d^2 = 0$ as an operator. This results from the fact that the external derivative of $n$-forms for all $n$ can be reduced to the external derivative of lower degree forms, and eventually to $0$-forms. We then can get the result from Axiom 2).
+\end{remark}
+
+\begin{remark}
+    In particular, if $f$ is a $0$-form (i.e. scalar-valued functions), then for any differential form $a$,
+    \[
+     \d(fa) = \d(f \wedge a) = (\d f) \wedge a + f \wedge (\d a)
+    \]
+    as when one of the multiplicands is a $0$-form, or in general scalars, scalar multiplication and wedge product are equivalent. 
+\end{remark}
+
+\begin{example}
+    Consider the dual space of $\R^n$, with covectors $\d x^i$ for $i \in \llbracket 1, n \rrbracket$ a basis. Let $I \subseteq \{1, \dots, n\}$ be the index set, and $i_1, \dots, i_k \in I$. Consider the exterior derivative of
+    \[
+        \varphi = f(\d x^{i_1} \wedge \dots \wedge \d x^{i_k}) =  f \wedge \d x^{i_1} \wedge \dots \wedge \d x^{i_k}
+    \]
+    we have by axiom 2)
+    \begin{align*}
+        \d \varphi
+        & = \d (f \wedge \d x^{i_1} \wedge \dots \wedge \d x^{i_k}) \\
+        & = \d f \wedge \d x^{i_1} \wedge \dots \wedge \d x^{i_k} + \sum_{j = 1}^{\abs{I} = k} (-1)^{j - 1} f \wedge \d x^{i_1} \wedge \dots \wedge \d^2 x^{i_p} \wedge \dots \wedge \d x^{i_k} \\
+        & = \d f \wedge \d x^{i_1} \wedge \dots \wedge \d x^{i_k} \\
+        & = (\pp{f}{x^i} \d x^i) \wedge (\d x^{i_1} \wedge \dots \wedge \d x^{i_k})
+    \end{align*}
+    where $f_i = \pp{f}{x^i}$ are the coefficients of the decomposition of $f$ into the covectors in the basis. In particular, if $\varphi$ is top-degree (i.e. $k = n$), then for all $i$ there exists some same $\d x^i$ in the following term ($\d \varphi$ becomes $(n+1)$-degree form). By anti-symmetry of the exterior algebra, this vanishes.
+
+    The conclusion then, is that the exterior derivative of top-degree forms vanish. 
+\end{example}
+
+\textstart
+The following introduces the dual notion of exterior derivative, which instead of raising the degree of the forms lowers it by 1.
+
+\begin{definition}[Tensor]
+    A \textbf{$(k, \ell)$-tensor} on a vector space $V$ is
+    \[
+        \Pi^{(k, \ell)}(V) = \underbrace{V \tensor \cdots \tensor V}_{k} \tensor \underbrace{\dual{V} \tensor \cdots \tensor \dual{V}}_{\ell}
+    \]
+\end{definition}
+
+\textstart
+A comprehensive introduction to tensors in the context of manifolds will be shown in chapter 1. The definition here is displayed only to ensure that we can have a rigorous definition of the followings:
+
+\begin{definition}[Tensor Contraction]
+    For a given vector space $V$, a \textbf{tensor contraction} is the operation which evaluates a covector on a vector:
+    \begin{align*}
+        C: \Pi^{(k, \ell)}(V)\quad & \to \quad \Pi^{(k - 1, \ell - 1)}(V) \\[2pt]
+        (v_1 \tensor \dots \tensor v_k \tensor v_1^{\ast} \tensor \dots \tensor v_{\ell}^{\ast})\quad & \mapsto \quad v_{\ell}^{\ast}(v_k) (v_1 \tensor \dots \tensor v_{k - 1} \tensor v_1^{\ast} \tensor \dots \tensor v_{\ell - 1}^{\ast})
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Interior Derivative]
+    An \textbf{interior derivative (interior product)} is a tensor contraction of differential forms with a vector field:
+    \[
+        \iota: \mathfrak{X}(M) \times \Omega^{k}(M) \to \Omega^{k-1}(M) \qquad \iota(X, \omega)(X_1, \dots, X_{n-1}) = \omega(X, X_1, \dotsm X_{n-1})
+    \]
+    The vector field is often written as subscripts. That is, $\iota(X, -)$ is denoted as $\iota_X(-)$.
+\end{definition}
+
+\begin{proposition}
+    Interior Derivative is the unique anti-derivation of degree -1, i.e. for $a$ a $p$-form and $b$ a $q$-form, we have
+    \[
+        \iota_X(a \wedge b) = (\iota_X a) \wedge b + (-1)^p a \wedge (\iota_X b)
+    \]
+\end{proposition}
+
+\begin{proof}
+    Use the equation for computing wedge of differential forms, given in Remark \ref{rmk: wedge of differential forms}:
+    \begin{align*}
+        \iota_{w_1}(a \wedge b)(w_2, \dots, w_{p+q})
+        & = (a \wedge b) (w_1, \dots, w_{p+q}) \\
+        & = \sum_{\sigma \in S(p, q)} \operatorname{sgn}(\sigma) a(w_{\sigma(1)}, \dots, w_{\sigma(p)}) b(w_{\sigma(p+1)}, \dots, w_{\sigma(p+q)}) 
+    \end{align*}
+    Since by definition $\sigma \in S(p, q)$ satisfies
+    \[
+        \sigma(1) < \cdots < \sigma(p), \qquad \sigma(p+1) < \cdots < \sigma(p+q)
+    \]
+    $1$ can only be either $\sigma(1)$ or $\sigma(p+1)$ (as they are the smallest element in the corresponding set). Therefore we can do the decomposition:
+    \begin{align*}
+        \operatorname{LHS} 
+        & = \sum_{\sigma(1) = 1, \sigma \in S(p, q)} \operatorname{sgn}(\sigma) a(w_{1}, w_{\sigma(2)}, \dots, w_{\sigma(p)}) b(w_{\sigma(p+1)}, \dots, w_{\sigma(p+q)}) \\
+        & \qquad + \sum_{\sigma(p+1) = 1, \sigma \in S(p, q)} (-1)^p\operatorname{sgn}(\sigma) a(w_{\sigma(1)}, \dots, w_{\sigma(p)}) b(w_1, w_{\sigma(p+2)}, \dots, w_{\sigma(p+q)}) 
+    \end{align*}
+    as $\sigma(1) = 1$ does not contribute any inversion and does not change the signature of the permutation; but $\sigma(p+1) = 1$ contributes $p$ inversions, which contributes a factor $(-1)^p$ to the permutation. But see that in both expressions we have $w_1$ in the first position in the evaluation of the differential form. This gives the expression using interior product:
+    \[
+        \operatorname{LHS} = (\iota_{w_1} a) \wedge b + (-1)^p a \wedge (\iota_{w_1} b)
+    \]
+    which is exactly the desired formula. 
+\end{proof}
+
 \section{Lie Groups}
 
+\textstart
 This part provides an elementary introduction to Lie Groups and associated results, consulting \href{https://scholar.rose-hulman.edu/rhumj/vol15/iss2/5}{this note}. Some of the results may be reiterated in the main notes, and what provided here is only an elementary approach to the concepts. 
-
-\section{Exterior and Interior Derivative}
 
 \end{document}
