@@ -2,7 +2,7 @@
 \usepackage{../refalg}
 
 \begin{document}
-\Makepagesectionhead{MATH 635}{Differential Topology Preliminaries}{ARessegetes Stery}
+\Makepagesectionhead{MATH 635}{Basic Riemannian Constructions}{ARessegetes Stery}
 
 \tableofcontents
 \newpage
@@ -10,17 +10,13 @@
 \section{Riemannian Structure}
 
 \begin{definition}[Riemannian Structure]
-    Let $M$ be a smooth $n$-manifold. Then a \textbf{Riemannian Structure} on it is an assignment $M \ni p \mapsto g_p$, where $g_p: T_p M \times T_p M \to \R$ is a bilinear positive definite symmetric form, that depends smoothly on $p$. Such $g$ is a \textbf{Riemannian metric}. 
+    Let $M$ be a smooth $n$-manifold. Then a \textbf{Riemannian Structure} on it is an assignment $M \ni p \mapsto g_p$, where $g_p: T_p M \times T_p M \to \R$ is a bilinear, positive-definite, symmetric form, that depends smoothly on $p$. Such $g$ is a \textbf{Riemannian metric}. 
     
     Specifically, if $(x^1, \dots, x^n)$ is a coordinate system on $U \subseteq M$, then for $i, j \in \llbracket 1, n \rrbracket$, $p \in U$, define
     \[
         g_{ij}(p) = g_p\left(\restr{\pp{}{x^i}}{p}, \restr{\pp{}{x^j}}{p}\right)
     \]
     where $\restr{\pp{}{x^i}}{p} \in T_p M$ for all $i$. Then $g_{ij}$ is $\smooth$; and $g(p) = (g_{ij}(p))$ is a symmetric matrix that depends on $p$. The matrix is often referred to as the \textbf{metric tensor}. Evaluation on the metric can be done via $g_p(v_1, v_2) = v_1^T g(p) v_2$.
-\end{definition}
-
-\begin{definition}[Riemannian Manifold]
-    A \textbf{Riemannian Manifold} is a smooth manifold $M$ endowed with a Riemannian Metric $g$, often denoted as pair $(M, g)$. 
 \end{definition}
 
 \begin{example}
@@ -250,7 +246,7 @@ The proof of the lemma is via verifying that $\mathcal{E}$ is indeed a manifold,
 \begin{notation}
     Given a smooth manifold $M$, for $k, \ell \in \Z_{\geq 0}$, denote
     \[
-        \Pi^{(k, \ell)} M = \underbrace{TM \tensor \cdots \tensor TM}_{k} \tensor \underbrace{T^{\ast}M \tensor \cdots \tensor T^{\ast} M}_{\ell}
+        \mathscr{T}^{(k, \ell)} M = \Pi^{(k, \ell)} M = \underbrace{TM \tensor \cdots \tensor TM}_{k} \tensor \underbrace{T^{\ast}M \tensor \cdots \tensor T^{\ast} M}_{\ell}
     \]
     In particular, this is $TM$ for $k = 1, \ell = 0$, and is $T^{\ast}M$ for $k = 0, \ell = 1$. By identification in Remark \ref{rmk: tensor isomorphic to multilinear maps} maps $\Pi^{(k, \ell)} M \to M$ are always multilinear (with the identification with the Euclidean Space). 
 \end{notation}
@@ -267,6 +263,75 @@ In local coordinates, if we have local coordinates $(x^1, \dots, x^n)$ on $U \su
 where $i_k$s and $j_{\ell}$s run over $\{ 1, \dots, n \}$ arbitrarily. A section on $\Pi^{(k, \ell)} M$ is then $\sum_{i, j} f_{j_1, \dots, j_{\ell}}^{i_1, \dots, i_k}$, with it being smooth implies that all such $f$s are smooth (as functions).
 
 \section{Riemannian Metric}
+
+\begin{definition}[Riemannian Metric]
+    Given a Riemannian manifold $M$, a \textbf{Riemannian Metric} on $M$ is a (0, 2)-tensor $g$ that is symmetric and positive definite. In local coordinates,
+    \[
+        g = \sum_{i, j = 1}^n g_{ij} \d x^i \tensor \d x^j
+    \]
+    That is, for all $p \in M$, $g_p: T_p M \times T_p M \to \R$ is bilinaer and symmetric; and for all $v \in T_p M$, $g_p (v, v) \geq 0$, with equality reached if and only if $v = 0$.
+\end{definition}
+
+\begin{observation}
+    Notice that in local coordinates we have $v = v^i \ppd{x^i}$, $w = w^j \ppd{x^j}$. Evaluating the metric gives
+    \[
+        (\d x^i \tensor \d x^j) (v, w) = v^i w^j = v^j w^i = (\d x^i \tensor \d x^j) (w, v) \implies g_{ij} = g_{ji}
+    \]
+    Therefore, we can write
+    \begin{align*}
+        g 
+        & = \frac{1}{2} \left( g_{ij} \d x^i \tensor \d x^j + g_{ji} \d x^j \tensor \d x^i \right)
+        = \frac{1}{2} g_{ij} \left( \d x^i \tensor \d x^j + \d x^j \tensor \d x^i \right) \\
+        & = g_{ij} \left( \frac{1}{2} \left( \d x^i \tensor \d x^j + \d x^j \tensor \d x^i \right) \right)
+    \end{align*}
+    where $\left( \d x^i \tensor \d x^j + \d x^j \tensor \d x^i \right) \in \operatorname{Sym}(T_p M)$ which is in the symmetric tensor, i.e. invariant w.r.t permutation of the entries.  
+\end{observation}
+
+\begin{definition}[Riemannian Manifold]
+    A \textbf{Riemannian Manifold} is a pair $(M, g)$ where $g$ is a Riemannian metric on $M$. 
+\end{definition}
+
+\begin{definition}[Isometry]
+    A \smooth-map $F: (M_1, g_1) \to (M_2, g_2)$ is an \textbf{isometry} if and only if 
+    \begin{enumerate}[label=\arabic*)]
+        \item $F$ is a diffeomorphism.
+        \item For all $p \in M_1$, $u, v \in T_p M_1$, $g_2 (\d_p F(u), \d_p F(v)) = g_1(u, v)$.
+    \end{enumerate}
+    $F$ is a \textbf{local isometry} if only 2) holds. 
+\end{definition}
+
+\begin{remark}
+    Since $g$ is nondegenerate, $\d_p F$ is bijective as otherwise LHS of the equality in 2) will vanish. This then implies that $\dim M_1 = \dim M_2$, otherwise $\d_p F$ will either be not injective ($\dim M_1 > \dim M_2$) or not surjective ($\dim M_1 < \dim M_2$).
+\end{remark}
+
+\begin{theorem}
+    Any \smooth-manifold $M$ has a Riemannian metric.
+\end{theorem}
+
+\begin{proof}
+    Let $\{ (U_{\alpha}, \varphi_{\alpha}) \}$ be an atlas of $M$. By definition of the chart we have the embedding $\varphi_{\alpha} (U_{\alpha}) \longhookrightarrow \R^n$. Define in $U_{\alpha}$ the metric s.t. $\varphi_{\alpha}$ is an isometry. In local coordinates, the metric can be expressed as $g_{\alpha} = \sum_{i} \d x_{\alpha}^i \tensor \d x_{\alpha}^j$.
+
+    Let $(\chi_{\alpha})$ be a partition of unit subordinated to $(U_{\alpha})$ and $g = \sum_{\alpha} \chi_{\alpha} g_{\alpha}$. Nondegeneracy of the metric $g$ follows from the positivity of metric $g_{\alpha}$ and $\chi_{\alpha}$.
+\end{proof}
+
+\begin{example}
+    The following gives two constructions of Riemannian Metrics:
+    \begin{enumerate}[label=\arabic*)]
+        \item Let $(M, g)$ be a Riemannian manifold, with $N \subset M$ a submanifold. Then $N$ inherits a Riemannian metric from the Riemannian structure on $M$, as for all $p \in N$, $T_p N \subset T_p M$.
+        \item Consider Cartesian product of Riemannian manifolds. Given two Riemannian manifolds $(M_1, g_1)$, $(M_2, g_2)$, consider $M_1 \times M_2$. Then for all $(p_1, p_2) \in M_1 \times M_2$ we have the identification between the tangent spaces 
+        \[
+            T_{(p_1, p_2)} (M_1 \times M_2) \simeq T_{p_1} M_1 \oplus T_{p_2} M_2
+        \]
+        Then in coordinates, the combined metric is block diagonal: 
+        \[
+            g = \left(\begin{array}{@{}c|c@{}}
+                g_1 & 0 \\\hline
+                0 & g_2 \\
+                \end{array}\right)
+        \]
+
+    \end{enumerate}
+\end{example}
 
 \section{Coverings}
 
