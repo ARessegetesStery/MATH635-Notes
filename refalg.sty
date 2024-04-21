@@ -99,7 +99,7 @@
 
 \def\closure#1{\overline{#1}}
 \def\restr#1#2{\left.#1\right|_{#2}}
-\def\smooth{C^{\infty}}
+\newcommand{\smooth}[0]{\ensuremath{C^{\infty}}}
 
 \def\ppd#1{\frac{\partial}{\partial #1}}
 \def\pp#1#2{\frac{\partial #1}{\partial #2}}
@@ -117,6 +117,7 @@
 \definecolor{darkpurple}{HTML}{5e60ce}
 \definecolor{darkgreen}{HTML}{588157}
 \definecolor{darkbrown}{HTML}{7f4f24}
+\definecolor{deepblue}{HTML}{0652DD}
 
 \def\thmstyle#1#2
 {
@@ -133,6 +134,7 @@
 }
 
 \thmstyle{darkblue}{thmbox}
+\thmstyle{deepblue}{notationbox}
 \thmstyle{darkgray}{rmkbox}
 \thmstyle{darkpurple}{propbox}
 \thmstyle{darkgreen}{lemmabox}
@@ -148,7 +150,7 @@
 \declaretheorem[style=examplebox, name=Example, numberwithin=section, sibling=definition]{example}
 \declaretheorem[style=rmkbox, name=Observation, numberwithin=section, sibling=definition]{observation}
 \declaretheorem[style=rmkbox, name=Remark, numberwithin=section, sibling=definition]{remark}
-\declaretheorem[style=rmkbox, name=Notation, numbered=no]{notation}
+\declaretheorem[style=notationbox, name=Notation, numbered=no]{notation}
 \declaretheorem[style=propbox, name=Proposition, numberwithin=section, sibling=definition]{proposition}
 \declaretheorem[style=examplebox, name=Corollary, numberwithin=section, sibling=definition]{corollary}
 \declaretheorem[style=thmbox, name=Problem, numberwithin=section, sibling=definition]{problem}

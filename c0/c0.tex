@@ -2,7 +2,7 @@
 \usepackage{../refalg}
 
 \begin{document}
-\Makepagesectionhead{MATH 635}{Basic Definitions and Results}{ARessegetes Stery}
+\Makepagesectionhead{MATH 635}{Preliminary Definitions and Results}{ARessegetes Stery}
 
 \tableofcontents
 \newpage
@@ -93,7 +93,7 @@ This part seeks to introduce the differential between tangent bundles of manifol
 \begin{remark}
     By the universal property of tensor product, for $\wedge^k(M)$ we have the isomorphism
     \[
-        \dual{(w_1 \wedge \dots \wedge w_k)} \simeq \dual{w_1} \wedge \dots \dual{w_k}
+        \dual{(w_1 \wedge \dots \wedge w_k)} \simeq \dual{w_1} \wedge \dots \wedge \dual{w_k}
     \]
     i.e. there is an induced isomorphism between tensor of 1-forms and $k$-forms, via taking the tensor product of the 1-forms.
 \end{remark}
@@ -108,7 +108,7 @@ This part seeks to introduce the differential between tangent bundles of manifol
         for $\partial \in T_p M \simeq (\smooth(M) \to \R), \varphi \in \smooth(M)$.
         \item The \textbf{pullback} of $F$ at $p$ is defined on the \underline{covector field}, or \underline{linear forms}, defined as 
         \[
-            \dual{(\d_p F)}: \dual{T_{F(p)}}N \to \dual{T_p} M, \qquad \dual{(\d_p F)}(f)(\partial) = f(\d_p F(\partial))
+            \dual{(\d_p F)}: \dual{T_{F(p)}}N \to \dual{T_p} M, \qquad \underbrace{\dual{(\d_p F)}(f)}_{\in \dual{T_p}M}(\partial) = f(\d_p F(\partial))
         \]
         where $f \in \dual{T_{F(p)}} N, \partial \in T_p M$.
     \end{itemize}
@@ -146,7 +146,7 @@ Under the context of differential geometry it is then interesting to figure out 
     \]
     and further for all $m, n \in \Z_{\geq 0}$, $R_m R_n \subseteq R_{m + n}$. 
 
-    An algebra is \underline{graded} if it is graded when viewed as a ring. An element $x$ in a graded ring $R$ is \underline{homogeneous} if there exists some $n$ s.t. $x \in R_n$. A \underline{graded map of degree $d$} is a map between the $d$-th grade in the domain and image. 
+    An algebra is \underline{graded} if it is graded when viewed as a ring. An element $x$ in a graded ring $R$ is \underline{homogeneous} if there exists some $n$ s.t. $x \in R_n$. A \underline{graded map of degree $d$} is a map between the $d$-th grade of the domain and image. 
 \end{definition}
 
 \begin{notation}
@@ -196,7 +196,7 @@ Under the context of differential geometry it is then interesting to figure out 
 \begin{remark}
     In particular, if $f$ is a $0$-form (i.e. scalar-valued functions), then for any differential form $a$,
     \[
-     \d(fa) = \d(f \wedge a) = (\d f) \wedge a + f \wedge (\d a)
+     \d(fa) = \d(f \wedge a) = (\d f) \wedge a + f \wedge (\d a) = (\d f) \wedge a + f \d a
     \]
     as when one of the multiplicands is a $0$-form, or in general scalars, scalar multiplication and wedge product are equivalent. 
 \end{remark}
@@ -214,7 +214,7 @@ Under the context of differential geometry it is then interesting to figure out 
         & = \d f \wedge \d x^{i_1} \wedge \dots \wedge \d x^{i_k} \\
         & = (\pp{f}{x^i} \d x^i) \wedge (\d x^{i_1} \wedge \dots \wedge \d x^{i_k})
     \end{align*}
-    where $f_i = \pp{f}{x^i}$ are the coefficients of the decomposition of $f$ into the covectors in the basis. In particular, if $\varphi$ is top-degree (i.e. $k = n$), then for all $i$ there exists some same $\d x^i$ in the following term ($\d \varphi$ becomes $(n+1)$-degree form). By anti-symmetry of the exterior algebra, this vanishes.
+    where $f_i = \pp{f}{x^i}$ are the coefficients of the decomposition of $f$ into the covectors in the basis, and the first term of the wedge product is a summation using the \emph{Einstein summation notation} (omitting the $\Sigma$). In particular, if $\varphi$ is top-degree (i.e. $k = n$), then for all $i$ there exists some same $\d x^i$ in the following term ($\d \varphi$ becomes $(n+1)$-degree form). By anti-symmetry of the exterior algebra, this vanishes.
 
     The conclusion then, is that the exterior derivative of top-degree forms vanish. 
 \end{example}
@@ -283,5 +283,7 @@ A comprehensive introduction to tensors in the context of manifolds will be show
 
 \textstart
 This part provides an elementary introduction to Lie Groups and associated results, consulting \href{https://scholar.rose-hulman.edu/rhumj/vol15/iss2/5}{this note}. Some of the results may be reiterated in the main notes, and what provided here is only an elementary approach to the concepts. 
+
+\textbf{TODO: FINISH}
 
 \end{document}
