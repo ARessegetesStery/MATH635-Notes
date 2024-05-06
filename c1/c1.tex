@@ -329,11 +329,38 @@ where $i_k$s and $j_{\ell}$s run over $\{ 1, \dots, n \}$ arbitrarily. A section
                 0 & g_2 \\
                 \end{array}\right)
         \]
-
     \end{enumerate}
 \end{example}
 
 \section{Coverings}
+
+\begin{definition}[Covering]
+    A \smooth\ surjective map $\pi: M \to N$ is a \smooth-\textbf{covering} if for all $q \in N$, there exists $U$, a connected neighborhood of $q$ s.t. if $\pi^{-1}(U) = \amalg_{j} V_j$, where $V_j$ are connected components of $\pi^{-1}(U)$; and for all $j$, $\restr{\pi}{V_j}: V_j \to U$ is a diffeomorphism.
+\end{definition}
+
+\begin{definition}[Automorphism of Covering]
+    The automorphism on the covering is defined as
+    \[
+        \Aut(\pi) := \{ F: M \to M \text{ diffeomorphisms} \mid \pi \circ F = \pi \}
+    \]
+    For any $f \in \Aut(\pi)$, it shuffles the fibers $\{ \pi^{-1}(q) \mid q \in N \}$.
+\end{definition}
+
+\begin{definition}[Normal Covering]
+    A covering $\pi$ is \textbf{normal} if $\Aut(\pi)$ acts transitively as fibers. 
+\end{definition}
+
+\begin{proposition}
+    Suppose a manifold $M$ has a Riemannian metric, and $f \in \Aut(\pi)$ is an isometry. Then there exists a unique Riemannian metric on $N$ s.t. $\pi$ is a local isometry.
+\end{proposition}
+
+\begin{proof}
+    Fix $q \in N$. Choose $p \in \pi^{-1}(q)$. 
+\end{proof}
+
+\begin{example}
+    
+\end{example}
 
 \section{Metric on Lee Group}
 

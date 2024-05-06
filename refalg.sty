@@ -136,10 +136,21 @@
 
 \thmstyle{darkblue}{thmbox}
 \thmstyle{deepblue}{notationbox}
-\thmstyle{darkgray}{rmkbox}
+% \thmstyle{darkgray}{rmkbox}
 \thmstyle{darkpurple}{propbox}
 \thmstyle{darkgreen}{lemmabox}
 \thmstyle{darkbrown}{examplebox}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{darkgray!70!black!85}, bodyfont=\normalfont,
+  spaceabove=1em,
+  mdframed={
+          linewidth=2pt,
+          rightline=false, topline=false, bottomline=false,
+          linecolor=darkgray!70!black!50,
+          nobreak=false
+      }
+]{rmkbox}
 
 \declaretheorem[style=thmbox, name=Definition, numberwithin=section]{definition}
 \declaretheorem[style=thmbox, name=Definition, numbered=no]{definition*}
