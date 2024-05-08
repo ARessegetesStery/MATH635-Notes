@@ -116,6 +116,7 @@
 \definecolor{darkblue}{HTML}{0077b6}
 \definecolor{darkgray}{RGB}{50,50,50}
 \definecolor{darkpurple}{HTML}{9e60ee}
+\definecolor{dimpurple}{HTML}{5e60ce}
 \definecolor{darkgreen}{HTML}{588157}
 \definecolor{darkbrown}{HTML}{7f4f24}
 \definecolor{deepblue}{HTML}{0652DD}
@@ -134,9 +135,9 @@
 ]{#2}
 }
 
-\thmstyle{darkblue}{thmbox}
+\thmstyle{darkblue}{defbox}
 \thmstyle{deepblue}{notationbox}
-% \thmstyle{darkgray}{rmkbox}
+\thmstyle{dimpurple}{thmbox}
 \thmstyle{darkpurple}{propbox}
 \thmstyle{darkgreen}{lemmabox}
 \thmstyle{darkbrown}{examplebox}
@@ -152,8 +153,8 @@
       }
 ]{rmkbox}
 
-\declaretheorem[style=thmbox, name=Definition, numberwithin=section]{definition}
-\declaretheorem[style=thmbox, name=Definition, numbered=no]{definition*}
+\declaretheorem[style=defbox, name=Definition, numberwithin=section]{definition}
+\declaretheorem[style=defbox, name=Definition, numbered=no]{definition*}
 \declaretheorem[style=thmbox, name=Theorem, numberwithin=section, sibling=definition]{theorem}
 \declaretheorem[style=thmbox, name=Theorem, numbered=no]{theorem*}
 \declaretheorem[style=lemmabox, name=Lemma, numberwithin=section, sibling=definition]{lemma}
@@ -165,8 +166,8 @@
 \declaretheorem[style=notationbox, name=Notation, numbered=no]{notation}
 \declaretheorem[style=propbox, name=Proposition, numberwithin=section, sibling=definition]{proposition}
 \declaretheorem[style=examplebox, name=Corollary, numberwithin=section, sibling=definition]{corollary}
-\declaretheorem[style=thmbox, name=Problem, numberwithin=section, sibling=definition]{problem}
-\declaretheorem[style=thmbox, name=Problem, numbered=no, sibling=definition]{problem*}
+\declaretheorem[style=defbox, name=Problem, numberwithin=section, sibling=definition]{problem}
+\declaretheorem[style=defbox, name=Problem, numbered=no, sibling=definition]{problem*}
 
 \def\textstart{\vspace*{-1em}}
 
