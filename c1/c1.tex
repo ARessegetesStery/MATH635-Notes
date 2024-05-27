@@ -347,22 +347,37 @@ where $i_k$s and $j_{\ell}$s run over $\{ 1, \dots, n \}$ arbitrarily. A section
 \end{definition}
 
 \begin{definition}[Normal Covering]
-    A covering $\pi$ is \textbf{normal} if $\Aut(\pi)$ acts transitively as fibers. 
+    A covering $\pi$ is \textbf{normal} if $\Aut(\pi)$ acts transitively on fibers. 
 \end{definition}
 
 \begin{proposition}
-    Suppose a manifold $M$ has a Riemannian metric, and $f \in \Aut(\pi)$ is an isometry. Then there exists a unique Riemannian metric on $N$ s.t. $\pi$ is a local isometry.
+    Suppose that we have a manifold $M$ has a Riemannian metric, $\pi: M \to N$ is a covering. If for all $f \in \Aut(\pi)$ it is an isometry, then there exists a unique Riemannian metric on $N$ s.t. $\pi$ is a local isometry.
 \end{proposition}
 
 \begin{proof}
-    Fix $q \in N$. Choose $p \in \pi^{-1}(q)$. 
+    Fix $q \in N$. Choose $p \in \pi^{-1}(q)$. Since $\pi$ restricted to a neighborhood of $p$ is a diffeomorphism, the differential $\d \pi_p: T_p M \to T_q N$ is bijective. Define the metric on $T_qN$ s.t. $d \pi_p$ is a linear isometry. 
+    
+    Check that this is compatible with the covering: if we have another choice $p' \in \pi^{-1} (q)$, by assumption there exists $F \in \Aut(\pi)$ an isometry s.t. $F(p) = F(p')$; and $\d F_p: T_p M \to T_{p'} M$ is a linear isometry. Then the composition is also a linear isometry:
+
+    \begin{minipage}{\linewidth}
+        \centering
+        \begin{tikzcd}
+            T_p M \arrow[rr, "\d F_p"]  & & T_{p'} M \arrow[ld, "\d \pi_{p'}"] \\
+            & T_p N \arrow[lu, <-, "\d \pi_p"] &
+        \end{tikzcd}
+    \end{minipage}
 \end{proof}
 
 \begin{example}
-    
+    The following gives some simple examples of coverings:
+    \begin{itemize}
+        \item The covering $\pi: S^n \to \RP^n$, where the antipodal points are identified. $\Aut(\pi)$ is the antipodal map.
+        \item Let $\Lambda \subset \R^n$ be a lattice (e.g. $\Lambda = \Z^n$). Considering $\R^n \to \R^n /\Lambda$ gives a covering map. $\Aut(\pi)$ are translations by $\Lambda$.
+        \item The hyperbolic space. Let $M$ be the upper half plane $\H = \{ (x, y) \mid y > 0 \}$ with metric $\d s^2 = \frac{1}{y^2} (\d x^2 + \d y^2)$. It turns out that any compact surface of genus $> 1$ is covered by $\H$. The covering $\pi: \H \to S$ is such that $\Aut(\pi)$ acts by isometries; and the metrics on $S$ is locally isometric to the hyperbolic metric.
+    \end{itemize}
 \end{example}
 
-\section{Metric on Lee Group}
+\section{Metric on Lie Group}
 
 \section{Common Objects on Riemannian Manifolds}
 
