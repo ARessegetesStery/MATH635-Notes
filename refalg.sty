@@ -104,11 +104,12 @@
 \newcommand{\smooth}[0]{\ensuremath{C^{\infty}}}
 
 \def\ppd#1{\frac{\partial}{\partial #1}}
+\def\ddd#1{\frac{\mathrm{d}}{\mathrm{d} #1}}
 \def\pp#1#2{\frac{\partial #1}{\partial #2}}
 \def\dd#1#2{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
 \def\d{\mathrm{d}}
 
-\def\iso{\overset{\sim}{\longrightarrow}}
+\def\isom{\overset{\sim}{\longrightarrow}}
 
 \renewcommand{\implies}{\ \ensuremath{\Longrightarrow}\ }
 
@@ -170,7 +171,9 @@
 \declaretheorem[style=defbox, name=Problem, numberwithin=section, sibling=definition]{problem}
 \declaretheorem[style=defbox, name=Problem, numbered=no, sibling=definition]{problem*}
 
+\newcommand{\nogap}[0]{\vspace*{-13pt}}
 \def\textstart{\vspace*{-1em}}
+\def\bu#1{\underline{\textbf{#1}}}
 
 \renewcommand\section{\@startsection {section}{1}{\z@}%
                                    {-5.5ex \@plus -1ex \@minus -.2ex}%

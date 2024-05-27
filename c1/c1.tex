@@ -54,7 +54,7 @@
     A \textbf{(real) vector bundle of rank $k$ over $M$} is a surjection $\pi: \mathcal{E} \to M$ satisfying the following properties:
     \begin{enumerate}
         \item For all $p \in M$, $\mathcal{E}_p := \pi^{-1}(p)$ has a real vector space structure of dimension $k$.
-        \item For all $p \in M$, there exists an open neighborhood $U \subset M$ containing $p$, and a diffeomorphism $\chi: \pi^{-1}(U) \iso U \times \R^n$ together with the projection $p: U \times \R^n \to U$ s.t.
+        \item For all $p \in M$, there exists an open neighborhood $U \subset M$ containing $p$, and a diffeomorphism $\chi: \pi^{-1}(U) \isom U \times \R^n$ together with the projection $p: U \times \R^n \to U$ s.t.
         \begin{itemize}
             \item $\restr{\pi}{U} = p \circ \chi$, i.e. the following diagram commutes:
             
@@ -153,7 +153,7 @@
     Given $M$ a smooth manifold, and for all $p \in M$ associate an $r$-dimensional vector space $\mathcal{E}_p$ to it. Define $\mathcal{E} := \coprod_{p \in M} \mathcal{E}_p$, and $\pi: \mathcal{E} \to M, (p, v) \mapsto p$. Further the followings are satisfied:
     \begin{itemize}
         \item There exists an open cover $\{U_{\alpha}\}$ of $M$.
-        \item For all $\alpha$, there exists a bijective map $\chi_{\alpha}: \pi^{-1}(U_{\alpha}) \iso U_{\alpha} \times \R^n$ s.t. $\pi = p \circ \chi_{\alpha}$ where $p$ is the projection $U_{\alpha} \times \R^n \to U_{\alpha}$.
+        \item For all $\alpha$, there exists a bijective map $\chi_{\alpha}: \pi^{-1}(U_{\alpha}) \isom U_{\alpha} \times \R^n$ s.t. $\pi = p \circ \chi_{\alpha}$ where $p$ is the projection $U_{\alpha} \times \R^n \to U_{\alpha}$.
     \end{itemize}
     Then there exists a unique $\smooth$ manifold structure on $\mathcal{E}$ s.t. $\chi_{\alpha}$ is a diffeomorphism; and $\mathcal{E}$ is a $\smooth$ bundle over $M$. 
 \end{lemma}
@@ -208,7 +208,7 @@ The proof of the lemma is via verifying that $\mathcal{E}$ is indeed a manifold,
 \end{remark}
 
 \begin{proposition}
-    Let $V$ and $W$ be finite dimensional real vector space. Then there exists a natural isomorphism $V \tensor W \iso \Hom(\dual{V}, W)$. In particular, this gives $\dual{V} \tensor \dual{V} \simeq \Hom(V, \dual{V}) \simeq \{\text{bilinear forms } V \times V \to \R\}$.
+    Let $V$ and $W$ be finite dimensional real vector space. Then there exists a natural isomorphism $V \tensor W \isom \Hom(\dual{V}, W)$. In particular, this gives $\dual{V} \tensor \dual{V} \simeq \Hom(V, \dual{V}) \simeq \{\text{bilinear forms } V \times V \to \R\}$.
 \end{proposition}
 
 \begin{proof}
@@ -415,7 +415,7 @@ where $i_k$s and $j_{\ell}$s run over $\{ 1, \dots, n \}$ arbitrarily. A section
     \]
     A side remark is that via identifying elements by the action of $S^1$ we have a map $S^{2n+1} \to S^{2n+1}/S^1 \simeq \CP^n$. The case for $n = 1$: $S^3 \to S^2 \simeq \CP^1$ is the \underline{Hopf map}. 
 
-    Now take $w \in S^{2n+1}$, Decompose $T_w S^{2n+1} = \R \partial_{\theta} \oplus H_W$, which are the vertical and horizontal subspaces. Explicitly, $\partial_{\theta}$ is the vector field given by $\restr{\dd{\theta} (e^{i \theta} w)}{\theta = 0}$; and $H_W$ is the orthogonal complement of $\R \partial_{\theta}$. 
+    Now take $w \in S^{2n+1}$, Decompose $T_w S^{2n+1} = \R \partial_{\theta} \oplus H_W$, which are the vertical and horizontal subspaces. Explicitly, $\partial_{\theta}$ is the vector field given by $\restr{\ddd{\theta} (e^{i \theta} w)}{\theta = 0}$; and $H_W$ is the orthogonal complement of $\R \partial_{\theta}$. 
 
     The map 
     \[
@@ -429,5 +429,62 @@ where $i_k$s and $j_{\ell}$s run over $\{ 1, \dots, n \}$ arbitrarily. A section
 \end{example}
 
 \section{Common Objects on Riemannian Manifolds}
+
+\textstart
+The common objects defined on Riemannian manifolds are the \bu{Length of Curves} extending lengths on the Euclidean space; and \bu{Volume Density/Form} extending definition of volumes. Since a Riemannian manifold may not be orientable (the transition functions of charts on the atlas may have negative Jacobian determinant), we have forms or densities separating these cases.
+
+\begin{definition}[Length of Curve]
+    Let $\gamma: \R \supset [a, b] \to M$ be a curve. Then the \textbf{length} of $\gamma$ is defined as
+    \[
+        \ell(\gamma) = \int_a^b \restr{\left(\norm{\gamma'(t)}\right)}{\gamma(t)} \d t
+    \] 
+    By chain rule this is independent of the parameterization.
+\end{definition}
+\nogap
+\begin{definition}[Distance]
+    Given a manifold $M$ and $p, q \in M$, the \textbf{distance} between $p$ and $q$ is defined as
+    \[
+        d(p, q) = \inf_{\gamma : \gamma(a) = p, \gamma(b) = q} \ell(\gamma)
+    \]
+\end{definition}
+
+\begin{remark}
+    The distance indeed gives a metric. For $d \geq 0$, the triangle inequality results from the triangle inequality of $\norm{-}$; and we have $d(p, q) = d(q, p)$ via reversing the parameterization. It is much more delicate to show that $d(p, q) = 0$, which we will prove in a later section. Furthermore, the infimum above does not have to be realized; but this will be the case if the space is compact.
+\end{remark}
+
+Now we seek to generalize the notion of volume. First consider the oriented case:
+\begin{definition}[Volume Form]
+    Given $(M, g)$ an oriented Riemannian manifold. Let $n = \dim M$. For all $p \in M$, let $\{ e_1, \dots, e_n \}$ be a positive orthonormal basis of $T_p M$. The \textbf{volume form} $\Omega_p$ is the differential $n$-form satisfying $\Omega_p(e_1, \dots, e_n)$ $= 1$. 
+\end{definition}
+
+In coordinates, for $(x^1, \dots, x^n)$ a positive chart, $\{ \ppd{x_1}, \dots, \ppd{x_n} \}$ a positive coordinate system for the tangent space at each point. Applying Gram-Schmidt orthonormalization at each point gives an orthonormal moving frame $\{ E_1, \dots, E_n \}$. The moving frame is smooth as Gram-Schmidt only applies linear transformations. Express the coordinate in the moving frame:
+\[
+    \ppd{x^i} = \sum_{\ell} a_i^{\ell} E_{\ell} \qquad A = \left( a_i^{\ell} \right) _{-\text{column index}}^{-\text{row index}}
+\]
+Then compute the metric:
+\[
+    g_{ij} = \inner{\ppd{x^i}, \ppd{x^j}} = a_i^j a_j^m \underbrace{\inner{E_{\ell}, E_m}}_{=\delta_{\ell m}} = \sum_{\ell} a_i^{\ell} a_j^{\ell} = \left( A^T A \right)_j^i
+\]
+as from the Einstein summation notation $\left( a_i^{\ell} b_{\ell}^j \right) = (BA)_i^j$, with the same notation for indices in matrices as above. The written in matrix the metric tensor is given by $A^T A$. On the other hand, apply linearity for all $n$-forms we have
+\[
+    \Omega \left( \ppd{x^1}, \dots \ppd{x^n} \right) = \det A \underbrace{\Omega(E_1, \dots, E_n)}_{=1 \text{ by orthonormality}} \d x^1 \wedge \cdots \wedge \d x^n
+\]
+as we need top-degree differential form. Then in coordinates this gives
+\[
+    \Omega_i^j = \sqrt{\det (g_{ij})} \d x^1 \wedge \cdots \wedge \d x^n
+\]
+
+Now consider the case where $M$ is not necessarily orientable. For proper definition we would like the domain where the function is supported is compact:
+\begin{definition}[Compact Support]
+    A function has \textbf{compact support} $I$, denoted $C_c(I)$, if $I$ is compact, and $f$ is zero outside $I$.
+\end{definition}
+\nogap
+\begin{definition}[Volume Density]
+    If $U$ is the domain of a chart $U \subset M$, and $f \in C_c^{\infty}(M)$. Then the \textbf{volume density} is defined as
+    \[
+        \underbrace{\int_M f(x^1, \dots, x^n) \sqrt{\det{g}} \d x^1 \wedge \cdots \wedge \d x^n}_{\text{Riemann Integral}}
+    \]
+\end{definition}
+This is independent of the choice of coordinates, as change of coordinate involves $\abs{\det\left( \pp{y^i}{x^k} \right)}$, which does not change the Riemann integral, as the magnitude is taken care of by the determinant of the metric; and the orientation (sign) of the transition does not show up.
 
 \end{document}
