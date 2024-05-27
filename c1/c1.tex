@@ -379,6 +379,55 @@ where $i_k$s and $j_{\ell}$s run over $\{ 1, \dots, n \}$ arbitrarily. A section
 
 \section{Metric on Lie Group}
 
+\begin{definition}[Invariance]
+    A Riemannian metric on a Lie Group is \textbf{left-invariant} if and only if for all $g \in G$, the map
+    \[
+        \ell_g: G \to G, \quad k \mapsto gk
+    \]
+    is an isometry. The metric being right-invariant is defined similarly.
+\end{definition}
+
+\begin{proposition}
+    Given a Lie group $G$, there is a one-to-one correspondence between left-invariant metrics on $G$, and positive definite inner products on $T_e G$.
+\end{proposition}
+
+\begin{proof}
+    Identify $G$ with $T_e G$ as $e$ acting on $G$ is the identity. Start with $\inner{-,-}_e: T_e G \times T_e G \to R$ positive-definite, to define the metric $\inner{-, -}_g : T_g G \times T_g G \to \R$. Impose that $\d (\ell_g)_e : T_e G \to T_g G$ is a linear isometry. To show that the resulting metric is left-invariant we need to show that for all $g, k \in G$, $\d (\ell_g)_k: T_k G \to T_{gk} G$ is a linear isometry. Consider the transition
+
+    \begin{minipage}{\linewidth}
+        \centering
+        \begin{tikzcd}
+            T_k G \arrow[rr, "\d(\ell_g)_k"] & & T_{gk} G \\
+            & T_e G \arrow[lu, "\d(\ell_g)_e"] \arrow[ru, "\d(\ell_{gk})_e"] & 
+        \end{tikzcd}
+    \end{minipage}
+    $\d (\ell_g)_k$ is then a linear isometry as both $\d(\ell_g)_e$ and $\d(\ell_{gk})_e$ are linear isometries. Smoothness follows similarly from composition of diffeomorphisms. The diagram commutes from by definition $\ell_g \circ \ell_k = \ell_{gk}$.
+\end{proof}
+
+\begin{remark}
+    There exists metrics that are bi-invariant (both left- and right-invariant).
+\end{remark}
+
+\begin{example}
+    Take $S^{2n+1} \subset \R^{2n+2} \simeq \C^{n+1}$. The group $S^1 = \{ e^{i \theta} \mid \theta \in [0, 2 \pi) \}$ acts on $S^{2n+1}$ via
+    \[
+        e^{i \theta} (z_0, \dots, z_n) = (e^{i \theta} z_0, \dots, e^{i \theta} z_n) \quad \text{$z_0, \dots, z_n$ not all zero}
+    \]
+    A side remark is that via identifying elements by the action of $S^1$ we have a map $S^{2n+1} \to S^{2n+1}/S^1 \simeq \CP^n$. The case for $n = 1$: $S^3 \to S^2 \simeq \CP^1$ is the \underline{Hopf map}. 
+
+    Now take $w \in S^{2n+1}$, Decompose $T_w S^{2n+1} = \R \partial_{\theta} \oplus H_W$, which are the vertical and horizontal subspaces. Explicitly, $\partial_{\theta}$ is the vector field given by $\restr{\dd{\theta} (e^{i \theta} w)}{\theta = 0}$; and $H_W$ is the orthogonal complement of $\R \partial_{\theta}$. 
+
+    The map 
+    \[
+        \rho(e^{i \theta}): S^{2n+1} \to S^{2n+1}, \quad z \mapsto e^{i \theta}z
+    \]
+    maps $H_w to H_{e^{i \theta}w}$ isometrically, i.e. with the previous decomposition we have the isometry
+    \[
+        \d \restr{\pi_w}{H_w} : H_w \simeq T_{\pi(w)} \CP^n
+    \]
+    where $\pi_w$ is the projection onto the horizontal subspace. This is the \underline{Fubini-Study Metric}. It will appear again in the last chapter when we briefly discuss complex manifolds.
+\end{example}
+
 \section{Common Objects on Riemannian Manifolds}
 
 \end{document}
