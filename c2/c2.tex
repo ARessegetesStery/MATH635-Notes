@@ -7,6 +7,17 @@
 \tableofcontents
 \newpage
 
+\textstart
+Recall in Euclidean space, we have the notion of \underline{directional derivative}: given a $C^1$-continuous function $f$ and a vector $h$, the directional derivative at $v$ in $h$ is given by
+\begin{equation}\label{eq: directional derivatives on Euclidean space}
+    \restr{\ddd{t} f(v + th)}{t = 0} = \lim_{t \to 0} \frac{1}{t} \left( f(v + th) - f(v) \right)
+\end{equation}
+or, given a vector field $Y$, a tangent vector $v$, and viewing tangent vectors are derivations we have in coordinates
+\[
+    \bar{\nabla}_v Y = v(Y^1) \restr{\ddd{x^1}}{p} + \cdots + v(Y^n) \restr{\ddd{x^n}}{p}
+\]
+The goal, then, is to extend this to arbitrary manifolds, without resorting to its ambient Euclidean space. This cannot directly extend to general Riemannian manifolds, as at different points their tangent spaces are in fact different spaces, where, for example, the vector field version of Eq. \eqref{eq: directional derivatives on Euclidean space} involves subtracting vectors in different tangent spaces, which is not properly defined. This chapter introduces tools for handling this problem.
+
 \section{Covariant Derivative}
 
 \section{Connection in a Moving Frame}
