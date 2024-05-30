@@ -16,9 +16,78 @@ or, given a vector field $Y$, a tangent vector $v$, and viewing tangent vectors 
 \[
     \bar{\nabla}_v Y = v(Y^1) \restr{\ddd{x^1}}{p} + \cdots + v(Y^n) \restr{\ddd{x^n}}{p}
 \]
-The goal, then, is to extend this to arbitrary manifolds, without resorting to its ambient Euclidean space. This cannot directly extend to general Riemannian manifolds, as at different points their tangent spaces are in fact different spaces, where, for example, the vector field version of Eq. \eqref{eq: directional derivatives on Euclidean space} involves subtracting vectors in different tangent spaces, which is not properly defined. This chapter introduces tools for handling this problem.
+The goal, then, is to extend this to arbitrary manifolds, without resorting to its ambient Euclidean space. This cannot directly extend to general Riemannian manifolds, as at different points their tangent spaces are in fact different spaces, where, for example, the vector field version of Eq. \eqref{eq: directional derivatives on Euclidean space} involves subtracting vectors in different tangent spaces, which is not properly defined. This chapter introduces tools for handling this problem, i.e. how to ``connect'' different tangent spaces.
 
 \section{Covariant Derivative}
+
+\textstart
+We start by specifying what properties that we would like to have on the new definition of ``derivation''.
+
+\begin{notation}
+    Let $M$ be a smooth manifold. Denote $\X(M) := \{ \smooth \text{-vector fields on }M \}$
+\end{notation}
+\nogap
+\begin{definition}[Connection/Covariant Derivative]
+    Given a vector bundle $\pi: \E \to M$, a \textbf{connection}, or \textbf{covariant derivative} on $\E$ correlates to each $X \in \X(M)$ an $\R$-linear operator $\nabla_X : \Gamma(\E) \to \Gamma(\E)$ mapping sections to sections, s.t.
+    \begin{enumerate}[label=\arabic*)]
+        \item It is a \emph{derivation}, i.e. for all $f \in \smooth(M)$, $s \in \Gamma(\E)$, 
+        \[
+            \nabla_X (fs) = f \nabla_X (s) + \underbrace{X(f)}_{=\d f(x)} s
+        \]
+        \item It is $\smooth(M)$-linear in $X$, i.e. for all $X, Y \in \X(M)$, $f \in \smooth(M)$, as operators we have
+        \[
+            \nabla_{fX + Y} = f \nabla_X + \nabla_Y
+        \]
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    This generalization of the definition of derivatives indeed agrees with the Euclidean case, or for manifolds embedded in the Euclidean space:
+    \begin{enumerate}
+        \item Let $M = U \subset \R^n$ be an open subset, with dimension $r$. Let $\E = U \times \R^r$, the trivial bundle. Then the section $s \in \Gamma(\E)$ is just 
+        \[
+            psi: U \to \R^r, \quad s(p) = (p, \psi(p))
+        \]
+        The trivial connection is the directional derivative (but $p$ is not necessarily unit, which is different from the definition of directional derivative):
+        \[
+            \left( \bar{\nabla}_{\bar{X}} \psi \right) (p) - \lim_{t \to 0} \frac{1}{t} ( \underbrace{\psi(p + t \bar{X}_p)}_{\in \E_{p + t \bar{X}_p}} - \underbrace{\psi(p)}_{\in \E_p} ) = \psi'(p) \bar{X}_p
+        \]
+        Notice that we often denote the connection $\nabla$ and vector field $X$ with a bar to indicate that they are defined on the (ambient) Euclidean space. Notice that the difference is taken on different bundles; but by the triviality of the bundle we can identify both of them with $\R^r$, thus making the operation valid.
+        \item Take $M \subset \R^N$ submanifold. $\E = TM$ the tangent bundle. Let $Y \in \Gamma(TM)$, a vector field on $M$; and let $X \in \X(M)$. Let $c: (-\varepsilon, \varepsilon) \to M$ be an integral curve of $X$, i.e. satisfying $\dd{c}{t} = X_{c(t)}$. Then we can still calculate the directional derivative similarly as above, given by
+        \[
+            \lim_{t \to 0} \frac{1}{t} ( \underbrace{Y(c(t))}_{\in T_{c(t)} M \subset \R^N} - Y(c(0)) )
+        \]
+        the operation is still valid as we can take it in the ambient space $\R^N$. Let $p = c(0)$, and $\pi_p: \R^N \to T_p M$ the orthogonal projection. Then we can define the connection as
+        \[
+            \left( \nabla_X Y \right) (p) = \pi_p \left(\lim_{t \to 0} \frac{1}{t} (Y(c(t)) - Y(p))\right)
+        \]
+        This is indeed a connection, as $\pi_p$ being a projection is linear.
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}
+    Given any connection $\nabla$ on $\E \to M$, and for $p \in M$, section $s \in \Gamma(\E)$, $X \in \X(M)$, the connection $\nabla_X s$ only depends on
+    \begin{enumerate}
+        \item The restriction of $s$ to any neighborhood of $p$.
+        \item The value $X_p$ of $X$ at $p$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Let $U$ be any neighborhood of $p$, and $\chi \in \smooth(M)$ supported inside $U$, with $\chi \equiv 1$ near $p$. Since the connection is a derivation, we have
+    \[
+        \left( \nabla_X (\chi s) \right) = \left( \chi \nabla_X s + {X(\chi)} \nabla_X s \right) (p) = \left( \chi \nabla_X s \right) (p) = (\nabla_X s)(p)
+    \]
+    For the second claim, let $(x^1, \dots, x^n)$ be a coordinate system near $p$. Let $X = a^i \ppd{x^i}$. Then by linearity of connection we have $\nabla_X s = a^i \nabla_{\ppd{x^i}} s$. Evaluate this at $p$:
+    \[
+        (\nabla_X s) = a^i(p) \underbrace{\left( \nabla_{\ppd{x^i} s} \right) (p)}_{\text{independent of $X$}}
+    \]
+    which gives that it depends only on $a^i(p)$, specified by $X(p)$.
+\end{proof}
+
+\begin{remark}
+    This is a fancy interpretation of $\nabla: \Gamma(\E) \to \Gamma(\E \tensor T^k M)$, i.e. $\nabla_X$ gives a tensor field on $M$ for any $X \in \Gamma(\E)$. We say that such objects that is isomorphic to a tensor field are \underline{tensorial}. Intuitively, an object is tensorial if it depends only on inputs locally at the point of interest, and does not depend on how inputs are changing (for example, their derivative).
+\end{remark}
 
 \section{Connection in a Moving Frame}
 
